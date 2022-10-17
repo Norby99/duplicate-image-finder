@@ -1,6 +1,6 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-from image_detector import ImageDetector
+#from image_detector import ImageDetector
 from threading import Thread
 import math
 import shutil
@@ -94,12 +94,12 @@ class GUI():
         self.delete_all_image_related_widgets()
         self.create_result_widgets()
     
-    def analise_images(self) -> None:
+    """ def analise_images(self) -> None:
         image_manipulation = ImageDetector(self.image_folder, self.destination_path, max_threads=self.set_max_threads)
         image_manipulation.load_images(self.analizing_method)
         self.label_loading.config(text="Confronting images...")
 
-        self.duplicate_images = image_manipulation.compare_images()
+        self.duplicate_images = image_manipulation.compare_images() """
 
     def update(self):
         if self.application_point == 0:     # choosing path
