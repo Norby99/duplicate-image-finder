@@ -10,15 +10,15 @@ import os
 #TODO: this class needs a lot of refactoring
 class GUI():
 
-    analizing_methods = { "Duplicate" : True, "Similar" : False }
+    analizing_methods: dict = { "Duplicate" : True, "Similar" : False }
     application_point = 0
     extend_window_size = [1200, 1000]
     mini_window_size = [300, 200]
     stages = []
+    folder: str = ""
+    destination_path: str = ""
     
-    def __init__(self, folders, destination_path, set_max_threads=10) -> None:
-        self.folders = folders
-        self.destination_path = destination_path
+    def __init__(self, set_max_threads=10) -> None:
         self.set_max_threads = set_max_threads
 
         self.window = tk.Tk()
