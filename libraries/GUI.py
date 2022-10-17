@@ -8,7 +8,7 @@ import os
 
 
 #TODO: this class needs a lot of refactoring
-class Application():
+class GUI():
 
     analizing_methods = { "Duplicate" : True, "Similar" : False }
     application_point = 0
