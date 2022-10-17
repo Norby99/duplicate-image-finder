@@ -1,5 +1,5 @@
 # duplicate-image-finder
-User friendly and fast image for finding duplicate or similar images in a folder.
+User friendly and fast duplicate/similar image finder.
 
 The project is in the state of work in progress so maybe some features are missing.
 
