@@ -8,6 +8,8 @@ class ScenePathsSelector(AbstractScene):
 
     __image_folder: str = ""
     __destination_path: str = ""
+    
+    __widgets = []
 
     def __init__(self) -> None:
         pass
@@ -17,7 +19,8 @@ class ScenePathsSelector(AbstractScene):
         self.create_path_widgets()
 
     def destroy(self) -> None:
-        pass
+        for i in self.__widgets:
+            i.destroy()
 
     def create_path_widgets(self) -> None:
         lbl_image_path = tk.Label(self.__window, text=self.__image_folder)
@@ -25,6 +28,8 @@ class ScenePathsSelector(AbstractScene):
 
         lbl_dest_path = tk.Label(self.__window, text=self.__destination_path)
         btn_dest_path = tk.Button(self.__window, text="Destination folder", command=lambda: self.bind_button_to_label(filedialog.askdirectory(), self.__destination_path, lbl_dest_path))
+
+        self.__widgets.extend([lbl_image_path, btn_image_path, lbl_dest_path, btn_dest_path])
 
         btn_image_path.pack(pady=5)
         lbl_image_path.pack(pady=5)
