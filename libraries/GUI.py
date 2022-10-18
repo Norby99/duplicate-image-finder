@@ -30,6 +30,12 @@ class GUI():
 
         self.window.protocol("WM_DELETE_WINDOW", self.set_stop_running)
 
+    def set_scene(self, scene: AbstractScene) -> None:
+        if self.__current_scene is not None:
+            self.__current_scene.destroy()
+        self.__current_scene = scene
+        self.__current_scene.setup()
+
     def get_image_folder(self):
         return self.__image_folder
 
