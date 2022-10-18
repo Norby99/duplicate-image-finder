@@ -14,7 +14,11 @@ class Launcher:
         next(self.__application_point)
         self.update()
 
-        self.__app.window.mainloop()
+        while self.__app.running:
+            self.__app.update()
+            print(self.__app.get_my())
+
+        self.__app.window.destroy()
 
     def update(self):
         if self.__application_point.current == "file_chooser":     # choosing path
