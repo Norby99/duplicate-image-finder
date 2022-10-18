@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
+import tkinter as tk
 
 class AbstractScene(ABC):
 
     @abstractmethod
-    def setup(self):
+    def setup(self, window: tk.Tk) -> None:
         pass
 
     @abstractmethod
-    def destroy(self):
+    def destroy(self) -> None:
         pass
