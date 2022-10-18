@@ -17,7 +17,6 @@ class Launcher:
 
         while self.__app.running:
             self.__app.update()
-            print(self.__app.get_image_folder())
 
         self.__app.window.destroy()
 
