@@ -1,7 +1,9 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 import tkinter.filedialog
-#from image_detector import ImageDetector
+
+from libraries.scenes.abstract_scene import AbstractScene
+
 from threading import Thread
 import math
 import shutil
@@ -16,6 +18,7 @@ class GUI():
     __image_folder: str = ""
     __destination_path: str = ""
     running: str = True
+    __current_scene: AbstractScene = None
     
     def __init__(self, set_max_threads=10) -> None:
         self.set_max_threads = set_max_threads
@@ -26,9 +29,6 @@ class GUI():
         self.window.configure(background="white")
 
         self.window.protocol("WM_DELETE_WINDOW", self.set_stop_running)
-
-    def set_stop_running(self) -> None:
-        self.running = False
 
     def get_my(self):
         return self.__image_folder
@@ -202,6 +202,9 @@ class GUI():
         self.right_image_details.destroy()
 
         self.btn_skip.destroy()
+
+    def set_stop_running(self) -> None:
+        self.running = False
 
     def destroy_buttons(self, btns) -> None:
         for i in btns:
