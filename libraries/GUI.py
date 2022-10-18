@@ -1,22 +1,21 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+import tkinter.filedialog
 #from image_detector import ImageDetector
 from threading import Thread
 import math
 import shutil
 import os
 
-
 #TODO: this class needs a lot of refactoring
 class GUI():
 
-    analizing_methods: dict = { "Duplicate" : True, "Similar" : False }
-    application_point = 0
+    __analizing_methods: dict = { "Duplicate" : True, "Similar" : False }
     extend_window_size = [1200, 1000]
     mini_window_size = [300, 200]
-    stages = []
-    folder: str = ""
-    destination_path: str = ""
+    __image_folder: str = ""
+    __destination_path: str = ""
+    running: str = True
     
     def __init__(self, set_max_threads=10) -> None:
         self.set_max_threads = set_max_threads
@@ -26,18 +25,27 @@ class GUI():
         self.window.geometry(str(self.mini_window_size[0]) + "x"  + str(self.mini_window_size[1]))
         self.window.configure(background="white")
 
-        self.update()
+        self.window.protocol("WM_DELETE_WINDOW", self.set_stop_running)
 
-    def create_setup_widgets(self) -> None:
-        self.btns_setup = []
-        for i in self.folders:
-            self.btns_setup.append(tk.Button(self.window, text=i, command=lambda i=i: self.btns_path_click(self.folders[i])))
-            self.btns_setup[-1].pack(pady=5)
+    def set_stop_running(self) -> None:
+        self.running = False
+
+    def get_my(self):
+        return self.__image_folder
+
+    def create_path_widgets(self) -> None:
+        self.btns_path = []
+        for i in ["Source", "Destination"]:
+            self.btns_path.append(tk.Button(self.window, text=i, command=lambda i=i: self.btns_path_click(tkinter.filedialog.askdirectory())))
+            self.btns_path[-1].pack(pady=5)
+
+            self.label_path = tk.Label(self.window, text=self.__image_folder, font=("Helvetica", 12), background="white")
+            self.label_path.pack(pady=5)
 
     def create_analising_method_widgets(self) -> None:
         self.btns_analising_method = []
-        for i in self.analizing_methods:
-            self.btns_analising_method.append(tk.Button(self.window, text=i, command=lambda i=i: self.btns_analising_method_click(self.analizing_methods[i])))
+        for i in self.__analizing_methods:
+            self.btns_analising_method.append(tk.Button(self.window, text=i, command=lambda i=i: self.btns_analising_method_click(self.__analizing_methods[i])))
             self.btns_analising_method[-1].pack(pady=5)
 
     def create_loading_widgets(self) -> None:
@@ -49,7 +57,7 @@ class GUI():
             self.window.geometry(str(self.extend_window_size[0]) + "x"  + str(self.extend_window_size[1]))
             images = self.duplicate_images[0]
 
-            img_path1 = os.path.join(self.image_folder, images[0])
+            img_path1 = os.path.join(self.__image_folder, images[0])
             self.image1 = Image.open(img_path1)
             self.tk_image1 = self.get_imageTk(self.image1)
             self.left_image = tk.Label(self.window, image=self.tk_image1, background="white")
@@ -59,7 +67,7 @@ class GUI():
             text = "Size: " + str(self.image1.size[0]) + " x " + str(self.image1.size[1]) + "\nDimension= " + convert_size(os.stat(img_path1).st_size)
             self.left_image_details = tk.Label(self.window, text=text, font=("Helvetica", 12), background="white")
 
-            img_path2 = os.path.join(self.image_folder, images[1])
+            img_path2 = os.path.join(self.__image_folder, images[1])
             self.image2 = Image.open(img_path2)
             self.tk_image2 = self.get_imageTk(self.image2)
             self.right_image = tk.Label(self.window, image=self.tk_image1, background="white")
@@ -82,14 +90,14 @@ class GUI():
             self.label_loading.pack(pady=10, anchor="center")
 
     def btns_path_click(self, image_folder) -> None:
-        self.image_folder = image_folder
+        self.__image_folder = image_folder
 
     def btns_analising_method_click(self, method) -> None:
         self.analizing_method = method
 
     def image_clicked(self, image_element, skip=False) -> None:
         if not skip:
-            shutil.move(os.path.join(self.image_folder, self.duplicate_images[0][image_element]), os.path.join(self.destination_path, self.duplicate_images[0][image_element]))
+            shutil.move(os.path.join(self.__image_folder, self.duplicate_images[0][image_element]), os.path.join(self.__destination_path, self.duplicate_images[0][image_element]))
         self.duplicate_images.pop(0)
         self.delete_all_image_related_widgets()
         self.create_result_widgets()
@@ -101,13 +109,12 @@ class GUI():
 
         self.duplicate_images = image_manipulation.compare_images() """
 
+    #TODO: remove this method
     def update(self):
-        if self.application_point == 0:     # choosing path
+        self.window.update()
+        """ if self.application_point.current == "file_chooser":     # choosing path
             if not hasattr(self, "btns_setup"):
-                self.create_setup_widgets()
-            if hasattr(self, "image_folder"):
-                self.destroy_buttons(self.btns_setup)
-                self.application_point += 1    
+                self.create_path_widgets()
             
         elif self.application_point == 1:   # choosing analising method
             if not hasattr(self, "btns_analising_method"):
@@ -136,9 +143,7 @@ class GUI():
                 self.resize()
             
         elif self.application_point == 5:
-            pass
-
-        self.window.after(100, self.update)
+            pass """
 
     def get_imageTk(self, image) -> ImageTk.PhotoImage:
         dim = self.get_image_dimensions(image)
@@ -201,6 +206,9 @@ class GUI():
     def destroy_buttons(self, btns) -> None:
         for i in btns:
             i.pack_forget()
+
+    def destory(self) -> None:
+        self.window.destroy()
 
 #TODO: refactor this function in an utils class
 def convert_size(size_bytes) -> str:
