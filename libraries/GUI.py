@@ -1,6 +1,5 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-import tkinter.filedialog
 
 from libraries.scenes.abstract_scene import AbstractScene
 
@@ -34,19 +33,10 @@ class GUI():
         if self.__current_scene is not None:
             self.__current_scene.destroy()
         self.__current_scene = scene
-        self.__current_scene.setup()
+        self.__current_scene.setup(self.window)
 
     def get_image_folder(self):
         return self.__image_folder
-
-    def create_path_widgets(self) -> None:
-        self.btns_path = []
-        for i in ["Source", "Destination"]:
-            self.btns_path.append(tk.Button(self.window, text=i, command=lambda i=i: self.btns_path_click(tkinter.filedialog.askdirectory())))
-            self.btns_path[-1].pack(pady=5)
-
-            self.label_path = tk.Label(self.window, text=self.__image_folder, font=("Helvetica", 12), background="white")
-            self.label_path.pack(pady=5)
 
     def create_analising_method_widgets(self) -> None:
         self.btns_analising_method = []
