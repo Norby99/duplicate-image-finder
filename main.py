@@ -1,5 +1,6 @@
 from libraries.GUI import GUI
 from libraries.utils.iterator import Iterator
+from libraries.scenes.scene_paths_selector import ScenePathsSelector
 import multiprocessing
 
 class Launcher:
@@ -22,7 +23,7 @@ class Launcher:
 
     def update(self):
         if self.__application_point.current == "file_chooser":     # choosing path
-            self.__app.create_path_widgets()
+            self.__app.set_scene(ScenePathsSelector())
 
 if __name__ == "__main__":
     launcher = Launcher()
