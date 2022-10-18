@@ -31,10 +31,10 @@ class ScenePathsSelector(AbstractScene):
 
         self.__widgets.extend([lbl_image_path, btn_image_path, lbl_dest_path, btn_dest_path])
 
-        btn_image_path.pack(pady=5)
-        lbl_image_path.pack(pady=5)
-        btn_dest_path.pack(pady=5)
-        lbl_dest_path.pack(pady=5)
+        btn_image_path.grid(row=0, column=0, sticky=tk.EW, padx=5, pady=5)
+        lbl_image_path.grid(row=0, column=1, padx=5, pady=5)
+        btn_dest_path.grid(row=1, column=0, sticky=tk.EW, padx=5, pady=5)
+        lbl_dest_path.grid(row=1, column=1, padx=5, pady=5)
         
     def bind_button_to_label(self, path, attribute, lable) -> None:
         attribute = path
