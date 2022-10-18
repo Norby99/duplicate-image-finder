@@ -30,7 +30,7 @@ class GUI():
 
         self.window.protocol("WM_DELETE_WINDOW", self.set_stop_running)
 
-    def get_my(self):
+    def get_image_folder(self):
         return self.__image_folder
 
     def create_path_widgets(self) -> None:
