@@ -1,8 +1,11 @@
 class Iterator:
 
     def __init__(self, iterator):
-        self.iterator = iterator
+        self.iterator = iter(iterator)
         self.current = None
+
+    def __iter__(self):
+        return self
         
     def __next__(self):
         try:
