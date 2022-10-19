@@ -1,4 +1,4 @@
-from libraries.scenes.abstract_scene import AbstractScene
+from libraries.view.scenes.abstract_scene import AbstractScene
 import tkinter as tk
 from tkinter import filedialog
 

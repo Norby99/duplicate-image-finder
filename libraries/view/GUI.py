@@ -1,7 +1,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
-from libraries.scenes.abstract_scene import AbstractScene
+from libraries.view.scenes.abstract_scene import AbstractScene
 
 from threading import Thread
 import math
