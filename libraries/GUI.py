@@ -35,6 +35,9 @@ class GUI():
         self.__current_scene = scene
         self.__current_scene.setup(self.window)
 
+    def get_scene(self) -> AbstractScene:
+        return self.__current_scene
+
     def get_image_folder(self):
         return self.__image_folder
 

@@ -39,3 +39,9 @@ class ScenePathsSelector(AbstractScene):
     def bind_button_to_label(self, path, attribute, lable) -> None:
         attribute = path
         lable.configure(text=attribute)
+
+    def get_image_folder(self) -> str:
+        return self.__image_folder
+    
+    def get_destination_path(self) -> str:
+        return self.__destination_path
