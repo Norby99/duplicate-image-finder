@@ -1,4 +1,4 @@
-from libraries.GUI import GUI
+from libraries.view.GUI import GUI
 from libraries.utils.iterator import Iterator
 from libraries.scenes.scene_paths_selector import ScenePathsSelector
 import multiprocessing
