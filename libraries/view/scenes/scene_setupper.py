@@ -36,7 +36,7 @@ class SceneSetupper(AbstractScene, Observable):
         btn_radio1 = tk.Radiobutton(self.__window, text="test", variable="test", value="test")
         btn_radio2 = tk.Radiobutton(self.__window, text="test1", variable="test", value="test1")
 
-        btn_next = tk.Button(self.__window, text="Next", command=lambda: self.fire(image_folder=self.__image_folder, destination_path=self.__destination_path))
+        btn_next = tk.Button(self.__window, text="Next", command=lambda: self.send_form())
 
         lbl_image_path.grid(row=0, column=1, padx=5, pady=5, sticky=tk.EW)
         btn_image_path.grid(row=0, column=0, padx=5, pady=5, sticky=tk.EW)
@@ -55,6 +55,13 @@ class SceneSetupper(AbstractScene, Observable):
     def set_destination_path(self, path, lable) -> None:
         self.__destination_path = path
         lable.configure(text=self.__destination_path)
+
+    def send_form(self) -> None:
+        """
+        Send form to model only if the form is valid
+        """
+        if self.__image_folder != "" and self.__destination_path != "":
+            self.fire(image_folder=self.__image_folder, destination_path=self.__destination_path)
 
     def get_image_folder(self) -> str:
         return self.__image_folder
