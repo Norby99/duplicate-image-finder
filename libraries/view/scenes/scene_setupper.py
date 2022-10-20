@@ -3,7 +3,7 @@ from libraries.controller.observable import Observable
 import tkinter as tk
 from tkinter import filedialog
 
-class ScenePathsSelector(AbstractScene, Observable):
+class SceneSetupper(AbstractScene, Observable):
 
     __window: tk.Tk = None
 

@@ -1,6 +1,6 @@
 from libraries.view.GUI import GUI
 from libraries.utils.iterator import Iterator
-from libraries.view.scenes.scene_paths_selector import ScenePathsSelector
+from libraries.view.scenes.scene_setupper import SceneSetupper
 
 from libraries.model.setupper import Setupper
 import multiprocessing
@@ -29,6 +29,6 @@ class MainController:
     def update(self):
         if self.__application_point.current == "file_chooser":     # choosing path
             setupper = Setupper()
-            scene = ScenePathsSelector()
+            scene = SceneSetupper()
             scene.subscribe(setupper.set_variables)
             self.__app.set_scene(scene)
