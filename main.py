@@ -6,7 +6,7 @@ import multiprocessing
 class Launcher:
 
     __app: GUI = None
-    __application_point: Iterator = Iterator(["file_chooser"])
+    __application_point: Iterator = Iterator(["file_chooser", "mode_chooser"])
 
     def __init__(self) -> None:
         core_count = multiprocessing.cpu_count()
