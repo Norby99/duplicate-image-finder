@@ -1,4 +1,4 @@
-from libraries.view.scenes.main_view import GUI
+from libraries.view.GUI import GUI
 from libraries.utils.iterator import Iterator
 from libraries.view.scenes.scene_setupper import SceneSetupper
 
