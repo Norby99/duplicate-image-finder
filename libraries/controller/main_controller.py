@@ -15,10 +15,14 @@ class MainController:
         next(self.__application_point)
         self.update()
 
-        while self.__app.running:
-            self.__app.update()
+        self.main_loop()
 
         self.__app.window.destroy()
+        
+
+    def main_loop(self):
+        while self.__app.running:
+            self.__app.update()
 
     def update(self):
         if self.__application_point.current == "file_chooser":     # choosing path
