@@ -14,8 +14,6 @@ class GUI():
     __analizing_methods: dict = { "Duplicate" : True, "Similar" : False }
     extend_window_size = [1200, 1000]
     mini_window_size = [300, 200]
-    __image_folder: str = ""
-    __destination_path: str = ""
     running: str = True
     __current_scene: AbstractScene = None
     
@@ -37,9 +35,6 @@ class GUI():
 
     def get_scene(self) -> AbstractScene:
         return self.__current_scene
-
-    def get_image_folder(self):
-        return self.__image_folder
 
     def create_analising_method_widgets(self) -> None:
         self.btns_analising_method = []
