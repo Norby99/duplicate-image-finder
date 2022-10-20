@@ -1,4 +1,4 @@
-from libraries.view.main_view import GUI
+from libraries.view.main_view import MainView
 from libraries.utils.iterator import Iterator
 from libraries.view.scenes.scene_setupper import SceneSetupper
 
@@ -7,12 +7,12 @@ import multiprocessing
 
 class MainController:
 
-    __app: GUI = None
+    __app: MainView = None
     __application_point: Iterator = Iterator(["file_chooser", "mode_chooser"])
 
     def __init__(self) -> None:
         core_count = multiprocessing.cpu_count()
-        self.__app = GUI(set_max_threads=core_count)
+        self.__app = MainView(set_max_threads=core_count)
 
         next(self.__application_point)
         self.update()
