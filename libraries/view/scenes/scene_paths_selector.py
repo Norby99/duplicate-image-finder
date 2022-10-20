@@ -27,19 +27,34 @@ class ScenePathsSelector(AbstractScene, Observable):
         self.__window.columnconfigure(1, weight=1)
         self.__window.rowconfigure(1, weight=1)
 
-        btn_image_path = tk.Button(self.__window, text="Image folder", command=lambda: self.bind_button_to_label(filedialog.askdirectory(), self.__image_folder, lbl_image_path)).grid(row=0, column=0, padx=5, pady=5)
-        lbl_image_path = tk.Label(self.__window, text=self.__image_folder).grid(row=0, column=1, padx=5, pady=5, sticky=tk.W)
-
-        btn_dest_path = tk.Button(self.__window, text="Destination folder", command=lambda: self.bind_button_to_label(filedialog.askdirectory(), self.__destination_path, lbl_dest_path)).grid(row=1, column=0, sticky=tk.EW, padx=5, pady=5)
-        lbl_dest_path = tk.Label(self.__window, text=self.__destination_path).grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
-
-        self.__widgets.extend([lbl_image_path, btn_image_path, lbl_dest_path, btn_dest_path])
-
-        tk.Button(self.__window, text="Next", command=lambda: self.__window.fire(mode_chooser=True)).grid(row=3, column=1, sticky=tk.E, padx=5, pady=5)
+        lbl_image_path = tk.Label(self.__window, text=self.__image_folder)
+        btn_image_path = tk.Button(self.__window, text="Image folder", command=lambda: self.set_image_folder(filedialog.askdirectory(), lbl_image_path))
         
-    def bind_button_to_label(self, path, attribute, lable) -> None:
-        attribute = path
-        lable.configure(text=attribute)
+        lbl_dest_path = tk.Label(self.__window, text=self.__destination_path)
+        btn_dest_path = tk.Button(self.__window, text="Destination folder", command=lambda: self.set_destination_path(filedialog.askdirectory(), lbl_dest_path))
+
+        btn_radio1 = tk.Radiobutton(self.__window, text="test", variable="test", value="test")
+        btn_radio2 = tk.Radiobutton(self.__window, text="test1", variable="test", value="test1")
+
+        btn_next = tk.Button(self.__window, text="Next", command=lambda: self.fire(image_folder=self.__image_folder, destination_path=self.__destination_path))
+
+        lbl_image_path.grid(row=0, column=1, padx=5, pady=5, sticky=tk.EW)
+        btn_image_path.grid(row=0, column=0, padx=5, pady=5, sticky=tk.EW)
+        lbl_dest_path.grid(row=1, column=1, padx=5, pady=5, sticky=tk.EW)
+        btn_dest_path.grid(row=1, column=0, padx=5, pady=5, sticky=tk.EW)
+        btn_radio1.grid(row=2, column=0)
+        btn_radio2.grid(row=2, column=1)
+        btn_next.grid(row=3, column=1, sticky=tk.E, padx=5, pady=5)
+
+        self.__widgets.extend([lbl_image_path, btn_image_path, lbl_dest_path, btn_dest_path, btn_radio1, btn_radio2, btn_next])
+        
+    def set_image_folder(self, path, lable) -> None:
+        self.__image_folder = path
+        lable.configure(text=self.__image_folder)
+
+    def set_destination_path(self, path, lable) -> None:
+        self.__destination_path = path
+        lable.configure(text=self.__destination_path)
 
     def get_image_folder(self) -> str:
         return self.__image_folder
