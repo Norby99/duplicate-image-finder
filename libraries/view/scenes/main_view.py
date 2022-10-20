@@ -9,7 +9,7 @@ import shutil
 import os
 
 #TODO: this class needs a lot of refactoring
-class GUI():
+class MainView():
 
     __analizing_methods: dict = { "Duplicate" : True, "Similar" : False }
     extend_window_size = [1200, 1000]
