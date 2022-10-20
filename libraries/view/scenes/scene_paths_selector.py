@@ -23,18 +23,18 @@ class ScenePathsSelector(AbstractScene):
             i.destroy()
 
     def create_path_widgets(self) -> None:
-        lbl_image_path = tk.Label(self.__window, text=self.__image_folder)
-        btn_image_path = tk.Button(self.__window, text="Image folder", command=lambda: self.bind_button_to_label(filedialog.askdirectory(), self.__image_folder, lbl_image_path))
+        self.__window.columnconfigure(1, weight=1)
+        self.__window.rowconfigure(1, weight=1)
 
-        lbl_dest_path = tk.Label(self.__window, text=self.__destination_path)
-        btn_dest_path = tk.Button(self.__window, text="Destination folder", command=lambda: self.bind_button_to_label(filedialog.askdirectory(), self.__destination_path, lbl_dest_path))
+        btn_image_path = tk.Button(self.__window, text="Image folder", command=lambda: self.bind_button_to_label(filedialog.askdirectory(), self.__image_folder, lbl_image_path)).grid(row=0, column=0, padx=5, pady=5)
+        lbl_image_path = tk.Label(self.__window, text=self.__image_folder).grid(row=0, column=1, padx=5, pady=5, sticky=tk.W)
+
+        btn_dest_path = tk.Button(self.__window, text="Destination folder", command=lambda: self.bind_button_to_label(filedialog.askdirectory(), self.__destination_path, lbl_dest_path)).grid(row=1, column=0, sticky=tk.EW, padx=5, pady=5)
+        lbl_dest_path = tk.Label(self.__window, text=self.__destination_path).grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
 
         self.__widgets.extend([lbl_image_path, btn_image_path, lbl_dest_path, btn_dest_path])
 
-        btn_image_path.grid(row=0, column=0, sticky=tk.EW, padx=5, pady=5)
-        lbl_image_path.grid(row=0, column=1, padx=5, pady=5)
-        btn_dest_path.grid(row=1, column=0, sticky=tk.EW, padx=5, pady=5)
-        lbl_dest_path.grid(row=1, column=1, padx=5, pady=5)
+        tk.Button(self.__window, text="Next", command=lambda: self.__window.fire(mode_chooser=True)).grid(row=3, column=1, sticky=tk.E, padx=5, pady=5)
         
     def bind_button_to_label(self, path, attribute, lable) -> None:
         attribute = path
