@@ -1,13 +1,14 @@
 from libraries.view.main_view import MainView
 from libraries.utils.iterator import Iterator
-from libraries.view.scenes.scene_setupper import SceneSetupper
 
-from libraries.model.setupper import Setupper
+from libraries.controller.setup_controller import SetuperController
+from libraries.controller.abstract_controller import AbstractController
+
 import multiprocessing
 
 class MainController:
 
-    __app: MainView = None
+    __current_controller: AbstractController = None
     __application_point: Iterator = Iterator(["file_chooser", "mode_chooser"])
 
     def __init__(self) -> None:
@@ -28,7 +29,5 @@ class MainController:
 
     def update(self):
         if self.__application_point.current == "file_chooser":     # choosing path
-            setupper = Setupper()
-            scene = SceneSetupper()
-            scene.subscribe(setupper.set_variables)
-            self.__app.set_scene(scene)
+            self.__current_controller = SetuperController()
+            self.__app.set_scene(self.__current_controller.get_scene())

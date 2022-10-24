@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
+from libraries.view.scenes.abstract_scene import AbstractScene
 
 class AbstractController(ABC):
 
     @abstractmethod
-    def set_model(self, model) -> None:
+    def get_model(self) -> None:
         pass
 
     @abstractmethod
-    def set_scene(self, scene) -> None:
+    def get_scene(self) -> AbstractScene:
         pass

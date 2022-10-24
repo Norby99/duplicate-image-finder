@@ -10,9 +10,10 @@ class SetuperController(AbstractController):
     def __init__(self) -> None:
         self.__scene = SceneSetupper()
         self.__model = Setupper()
+        self.__scene.subscribe(self.__model.set_variables)
 
-    def set_model(self, model) -> None:
-        self.__model = model
+    def get_model(self) -> None:
+        return self.__model
 
-    def set_scene(self, scene) -> None:
-        self.__scene = scene
+    def get_scene(self) -> None:
+        return self.__scene
