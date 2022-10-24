@@ -35,16 +35,6 @@ class MainView():
     def get_scene(self) -> AbstractScene:
         return self.__current_scene
 
-    def create_analising_method_widgets(self) -> None:
-        self.btns_analising_method = []
-        for i in self.__analizing_methods:
-            self.btns_analising_method.append(tk.Button(self.window, text=i, command=lambda i=i: self.btns_analising_method_click(self.__analizing_methods[i])))
-            self.btns_analising_method[-1].pack(pady=5)
-
-    def create_loading_widgets(self) -> None:
-        self.label_loading = tk.Label(self.window, text="Loading images...", font=("Helvetica", 16), background="white")
-        self.label_loading.pack(pady=10)
-
     def create_result_widgets(self) -> None:
         if len(self.duplicate_images) > 0:
             self.window.geometry(str(self.extend_window_size[0]) + "x"  + str(self.extend_window_size[1]))
@@ -81,12 +71,6 @@ class MainView():
             self.window.geometry(str(self.mini_window_size[0]) + "x"  + str(self.mini_window_size[1]))
             self.label_loading.config(text="No duplicates found")
             self.label_loading.pack(pady=10, anchor="center")
-
-    def btns_path_click(self, image_folder) -> None:
-        self.__image_folder = image_folder
-
-    def btns_analising_method_click(self, method) -> None:
-        self.analizing_method = method
 
     def image_clicked(self, image_element, skip=False) -> None:
         if not skip:
