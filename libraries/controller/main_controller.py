@@ -25,7 +25,7 @@ class MainController:
     def main_loop(self):
         while self.__app.running:
             self.__app.update()
-            if self.__current_controller.get_model.ready():
+            if self.__current_controller.get_model().ready():
                 self.update()
 
     def update(self):
