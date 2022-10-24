@@ -1,8 +1,9 @@
 from libraries.view.main_view import MainView
 from libraries.utils.iterator import Iterator
 
-from libraries.controller.setup_controller import SetuperController
 from libraries.controller.abstract_controller import AbstractController
+from libraries.controller.setup_controller import SetuperController
+from libraries.controller.analising_controller import AnalisingController
 
 import multiprocessing
 
@@ -10,7 +11,7 @@ class MainController:
 
     __current_controller: AbstractController = None
     __app: MainView = None
-    __application_point: Iterator = Iterator(["file_chooser", "mode_chooser"])
+    __application_point: Iterator = Iterator(["file_chooser", "analizing"])
 
     def __init__(self) -> None:
         core_count = multiprocessing.cpu_count()
@@ -33,4 +34,8 @@ class MainController:
         next(self.__application_point)
         if self.__application_point.current == "file_chooser":     # choosing path
             self.__current_controller = SetuperController()
+            self.__app.set_scene(self.__current_controller.get_scene())
+
+        elif self.__application_point.current == "analizing":
+            self.__current_controller = AnalisingController()
             self.__app.set_scene(self.__current_controller.get_scene())
