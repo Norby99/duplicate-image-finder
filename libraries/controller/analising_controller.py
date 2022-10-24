@@ -19,7 +19,7 @@ class AnalisingController(AbstractController):
         print(self.__image_folder)
 
         self.__scene.set_text("Loading images...")
-        self._model.analise(self.__image_folder)
+        self.__model.analise(self.__image_folder)
 
     def get_model(self) -> AbstractModel:
         return self.__model
