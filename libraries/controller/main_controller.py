@@ -15,10 +15,11 @@ class MainController:
     __data_collection: AbstractDataCollector = None
     __app: MainView = None
     __application_point: Iterator = Iterator(["file_chooser", "analizing"])
+    __core_count = 1
 
     def __init__(self) -> None:
-        core_count = multiprocessing.cpu_count()
-        self.__app = MainView(set_max_threads=core_count)
+        self.__core_count = multiprocessing.cpu_count()
+        self.__app = MainView()
 
         self.update()
 
@@ -41,5 +42,5 @@ class MainController:
             self.__app.set_scene(self.__current_controller.get_scene())
 
         elif self.__application_point.current == "analizing":
-            self.__current_controller = AnalisingController(self.__data_collection.get_image_folder())
+            self.__current_controller = AnalisingController(self.__core_count, self.__data_collection.get_image_folder())
             self.__app.set_scene(self.__current_controller.get_scene())

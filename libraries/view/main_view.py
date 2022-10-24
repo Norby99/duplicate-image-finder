@@ -16,8 +16,7 @@ class MainView():
     running: str = True
     __current_scene: AbstractScene = None
     
-    def __init__(self, set_max_threads=10) -> None:
-        self.set_max_threads = set_max_threads
+    def __init__(self) -> None:
 
         self.window = tk.Tk()
         self.window.title("Image Detector")
