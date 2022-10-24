@@ -16,19 +16,20 @@ class MainController:
         core_count = multiprocessing.cpu_count()
         self.__app = MainView(set_max_threads=core_count)
 
-        next(self.__application_point)
         self.update()
 
         self.main_loop()
 
         self.__app.window.destroy()
-        
 
     def main_loop(self):
         while self.__app.running:
             self.__app.update()
+            if self.__current_controller.get_model.ready():
+                self.update()
 
     def update(self):
+        next(self.__application_point)
         if self.__application_point.current == "file_chooser":     # choosing path
             self.__current_controller = SetuperController()
             self.__app.set_scene(self.__current_controller.get_scene())
