@@ -17,13 +17,13 @@ class SceneSetupper(AbstractScene, Observable):
 
     def setup(self, window: tk.Tk) -> None:
         self.__window = window
-        self.create_widgets()
+        self.__create_widgets()
 
     def destroy(self) -> None:
         for i in self.__widgets:
             i.destroy()
 
-    def create_widgets(self) -> None:
+    def __create_widgets(self) -> None:
         self.__window.columnconfigure(1, weight=1)
         self.__window.rowconfigure(1, weight=1)
 
