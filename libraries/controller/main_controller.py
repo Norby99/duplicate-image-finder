@@ -37,9 +37,9 @@ class MainController:
         next(self.__application_point)
         if self.__application_point.current == "file_chooser":     # choosing path
             self.__current_controller = SetuperController()
-            self.__data_collection = self.__current_controller
+            self.__data_collection = self.__current_controller.get_model()
             self.__app.set_scene(self.__current_controller.get_scene())
 
         elif self.__application_point.current == "analizing":
-            self.__current_controller = AnalisingController()
+            self.__current_controller = AnalisingController(self.__data_collection.get_image_folder())
             self.__app.set_scene(self.__current_controller.get_scene())
