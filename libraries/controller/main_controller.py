@@ -9,6 +9,7 @@ import multiprocessing
 class MainController:
 
     __current_controller: AbstractController = None
+    __app: MainView = None
     __application_point: Iterator = Iterator(["file_chooser", "mode_chooser"])
 
     def __init__(self) -> None:
