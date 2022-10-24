@@ -14,12 +14,12 @@ class AnalisingController(AbstractController):
 
     def __init__(self) -> None:
         self.__scene = SceneAnaliser()
-        self.__model = Analiser()
+        self.__model = Analiser(self.__image_folder)
 
         print(self.__image_folder)
 
         self.__scene.set_text("Loading images...")
-        self.__model.analise(self.__image_folder)
+        self.__model.analise()
 
     def get_model(self) -> AbstractModel:
         return self.__model
