@@ -19,10 +19,6 @@ class SceneSetupper(AbstractScene, Observable):
         self.__window = window
         self.__create_widgets()
 
-    def destroy(self) -> None:
-        for i in self.__widgets:
-            i.destroy()
-
     def __create_widgets(self) -> None:
         self.__window.columnconfigure(1, weight=1)
         self.__window.rowconfigure(1, weight=1)
@@ -68,3 +64,7 @@ class SceneSetupper(AbstractScene, Observable):
     
     def get_destination_path(self) -> str:
         return self.__destination_path
+
+    def destroy(self) -> None:
+        for i in self.__widgets:
+            i.destroy()
