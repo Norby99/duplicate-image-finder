@@ -9,7 +9,7 @@ class SceneSetupper(AbstractScene, Observable):
 
     __image_folder: str = ""
     __destination_path: str = ""
-    
+
     __widgets = []
 
     def __init__(self) -> None:
