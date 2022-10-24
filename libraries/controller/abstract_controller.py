@@ -7,5 +7,5 @@ class AbstractController(ABC):
         pass
 
     @abstractmethod
-    def set_view(self, view) -> None:
+    def set_scene(self, scene) -> None:
         pass
