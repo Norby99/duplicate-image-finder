@@ -26,6 +26,7 @@ class MainController:
         while self.__app.running:
             self.__app.update()
             if self.__current_controller.get_model().ready():
+                self.__current_controller.get_scene().destroy()
                 self.update()
 
     def update(self):
