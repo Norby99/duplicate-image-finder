@@ -3,7 +3,6 @@ from PIL import Image, ImageTk
 
 from libraries.view.scenes.abstract_scene import AbstractScene
 
-from threading import Thread
 import math
 import shutil
 import os
