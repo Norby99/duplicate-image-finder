@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/norby99/duplicate-image-finder/badge)](https://www.codefactor.io/repository/github/norby99/duplicate-image-finder)
+
 # duplicate-image-finder
 User friendly and fast duplicate/similar image finder.
 
