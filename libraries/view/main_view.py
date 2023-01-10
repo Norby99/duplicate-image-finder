@@ -20,7 +20,7 @@ class MainView():
 
         self.window = tk.Tk()
         self.window.title("Image Detector")
-        self.window.geometry(str(self.mini_window_size[0]) + "x"  + str(self.mini_window_size[1]))
+        self.window.geometry(str(self.mini_window_size[0]) + "x" + str(self.mini_window_size[1]))
         self.window.configure(background="white")
 
         self.window.protocol("WM_DELETE_WINDOW", self.set_stop_running)
@@ -36,7 +36,7 @@ class MainView():
 
     def create_result_widgets(self) -> None:
         if len(self.duplicate_images) > 0:
-            self.window.geometry(str(self.extend_window_size[0]) + "x"  + str(self.extend_window_size[1]))
+            self.window.geometry(str(self.extend_window_size[0]) + "x" + str(self.extend_window_size[1]))
             images = self.duplicate_images[0]
 
             img_path1 = os.path.join(self.__image_folder, images[0])
@@ -67,7 +67,7 @@ class MainView():
             if hasattr(self, "left_image"):
                 self.delete_all_image_related_widgets()
 
-            self.window.geometry(str(self.mini_window_size[0]) + "x"  + str(self.mini_window_size[1]))
+            self.window.geometry(str(self.mini_window_size[0]) + "x" + str(self.mini_window_size[1]))
             self.label_loading.config(text="No duplicates found")
             self.label_loading.pack(pady=10, anchor="center")
 
