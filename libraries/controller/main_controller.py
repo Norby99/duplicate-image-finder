@@ -44,3 +44,4 @@ class MainController:
         elif self.__application_point.current == "analizing":
             self.__current_controller = AnalisingController(self.__core_count, self.__data_collection.get_image_folder())
             self.__app.set_scene(self.__current_controller.get_scene())
+            self.__current_controller.start()
