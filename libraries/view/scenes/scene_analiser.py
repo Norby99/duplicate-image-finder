@@ -10,7 +10,7 @@ class SceneAnaliser(AbstractScene):
     __widgets: list = []
 
     def __init__(self) -> None:
-        pass
+        self.set_text("Analysing...")
 
     def set_text(self, text: str) -> None:
         self.__displayed_text = text

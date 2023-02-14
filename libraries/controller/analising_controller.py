@@ -23,12 +23,8 @@ class AnalisingController(AbstractController, Thread):
         self.__scene = SceneAnaliser()
         self.__model = Analiser(max_threads, self.__image_folder)
 
-        print(self.__image_folder)
-
     def run(self):
-        self.__scene.set_text("Loading images...")
         self.__model.analise()
-        self.__scene.set_text("Done")
 
     def get_model(self) -> AbstractModel:
         return self.__model
