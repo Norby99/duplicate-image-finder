@@ -44,6 +44,8 @@ class Analiser(AbstractModel):
             old_var[i.get_hash()].append(i)
         old_var = {k:v for k,v in old_var.items() if len(v)>1}
 
+        self.__ready = True
+
         return [[i for i in x] for x in old_var.values()]   # changing the index to the name outside of the loop above is a bit faster
 
     def __threadable_load_images(self, images_path: list) -> None:
