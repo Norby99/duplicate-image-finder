@@ -24,3 +24,6 @@ class ImageData:
     
     def get_image_dimensions(self) -> tuple:
         return self.__image_dimensions
+    
+    def __str__(self) -> str:
+        return self.__image_name + " " + self.__image_size
