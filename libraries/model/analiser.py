@@ -3,6 +3,8 @@ from libraries.model.abstract_model import AbstractModel
 import imagehash
 from PIL import Image
 
+from threading import Thread
+
 from os import listdir, path
 import warnings
 
@@ -26,7 +28,12 @@ class Analiser(AbstractModel):
         thread_list = []
         chunk_size = int(len(images_path) / self.__max_threads)
 
-        self.__load_images(images_path)
+        for i in range(0, len(images_path), chunk_size):
+            thread_list.append(Thread(target=self.__load_images, args=(images_path[i:i + chunk_size],)))
+            thread_list[-1].start()
+        
+        for thread in thread_list:
+            thread.join()
         print("Done")
 
     def __load_images(self, images_path: list) -> None:
