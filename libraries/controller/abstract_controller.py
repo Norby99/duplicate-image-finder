@@ -4,10 +4,17 @@ from libraries.model.abstract_model import AbstractModel
 
 class AbstractController(ABC):
 
-    @abstractmethod
-    def get_model(self) -> AbstractModel:
-        pass
+    __scene: AbstractScene = None
+    __model: AbstractModel = None
 
-    @abstractmethod
+    def set_model(self, model: AbstractModel) -> AbstractModel:
+        self.__model = model
+
+    def set_scene(self, scene: AbstractScene) -> AbstractScene:
+        self.__scene = scene
+
+    def get_model(self) -> AbstractModel:
+        return self.__model
+
     def get_scene(self) -> AbstractScene:
-        pass
+        return self.__scene
