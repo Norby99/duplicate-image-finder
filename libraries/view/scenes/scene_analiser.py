@@ -1,7 +1,6 @@
 from libraries.view.scenes.abstract_scene import AbstractScene
 import tkinter as tk
 
-
 class SceneAnaliser(AbstractScene):
 
     __window: tk.Tk = None
