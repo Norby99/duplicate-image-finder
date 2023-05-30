@@ -5,12 +5,12 @@ from tkinter import filedialog
 
 class SceneSetupper(AbstractScene, Observable):
 
-    __window: tk.Tk = None
+    __window: tk.Tk
 
     __image_folder: str = ""
     __destination_path: str = ""
 
-    __widgets = []
+    __widgets: list[tk.Widget] = []
 
     def __init__(self) -> None:
         pass
@@ -29,8 +29,8 @@ class SceneSetupper(AbstractScene, Observable):
         lbl_dest_path = tk.Label(self.__window, text=self.__destination_path)
         btn_dest_path = tk.Button(self.__window, text="Destination folder", command=lambda: self.set_destination_path(filedialog.askdirectory(), lbl_dest_path))
 
-        btn_radio1 = tk.Radiobutton(self.__window, text="test", variable="test", value="test")
-        btn_radio2 = tk.Radiobutton(self.__window, text="test1", variable="test", value="test1")
+        btn_radio1 = tk.Radiobutton(self.__window, text="test", value="test")
+        btn_radio2 = tk.Radiobutton(self.__window, text="test1", value="test1")
 
         btn_next = tk.Button(self.__window, text="Next", command=lambda: self.send_form())
 
@@ -44,11 +44,11 @@ class SceneSetupper(AbstractScene, Observable):
 
         self.__widgets.extend([lbl_image_path, btn_image_path, lbl_dest_path, btn_dest_path, btn_radio1, btn_radio2, btn_next])
         
-    def set_image_folder(self, path, lable) -> None:
+    def set_image_folder(self, path: str, lable: tk.Label) -> None:
         self.__image_folder = path
         lable.configure(text=self.__image_folder)
 
-    def set_destination_path(self, path, lable) -> None:
+    def set_destination_path(self, path: str, lable: tk.Label) -> None:
         self.__destination_path = path
         lable.configure(text=self.__destination_path)
 

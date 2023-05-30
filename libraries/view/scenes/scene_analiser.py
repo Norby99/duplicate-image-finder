@@ -3,7 +3,7 @@ import tkinter as tk
 
 class SceneAnaliser(AbstractScene):
 
-    __window: tk.Tk = None
+    __window: tk.Tk
 
     __displayed_text: str = ""
     __widgets: list = []

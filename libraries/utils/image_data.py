@@ -4,13 +4,13 @@ import math
 
 class ImageData:
      
-    __path: str = None
-    __name: str = None
-    __size: str = None
-    __dimensions: tuple = None
-    __hash: str = None
+    __path: str
+    __name: str
+    __size: str
+    __dimensions: tuple
+    __hash: str
 
-    def __init__(self, image_path: str, image_name: str, image_size: str, image_dimensions: tuple, hash: str) -> None:
+    def __init__(self, image_path: str, image_name: str, image_size: int, image_dimensions: tuple, hash: str) -> None:
         self.__path = image_path
         self.__name = image_name
         self.__size = convert_size(image_size)
@@ -39,7 +39,7 @@ class ImageData:
     def __str__(self) -> str:
         return self.__name + " " + self.__size
 
-def convert_size(size_bytes) -> str:
+def convert_size(size_bytes: int) -> str:
     if size_bytes == 0:
         return "0B"
     size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")

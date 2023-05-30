@@ -4,10 +4,10 @@ import tkinter as tk
 
 class SceneResult(AbstractScene):
     
-        __window: tk.Tk = None
+        __window: tk.Tk
 
-        __image1: ImageData = None
-        __image2: ImageData = None
+        __image1: ImageData
+        __image2: ImageData
     
         __widgets: list = []
     

@@ -4,13 +4,13 @@ from libraries.model.abstract_model import AbstractModel
 
 class AbstractController(ABC):
 
-    __scene: AbstractScene = None
-    __model: AbstractModel = None
+    __scene: AbstractScene
+    __model: AbstractModel
 
-    def set_model(self, model: AbstractModel) -> AbstractModel:
+    def __set_model(self, model: AbstractModel) -> None:
         self.__model = model
 
-    def set_scene(self, scene: AbstractScene) -> AbstractScene:
+    def __set_scene(self, scene: AbstractScene) -> None:
         self.__scene = scene
 
     def get_model(self) -> AbstractModel:
