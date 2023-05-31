@@ -2,19 +2,22 @@ from abc import ABC, abstractmethod
 from libraries.view.scenes.abstract_scene import AbstractScene
 from libraries.model.abstract_model import AbstractModel
 
+from typing import Any
+
 class AbstractController(ABC):
 
-    __scene: AbstractScene
-    __model: AbstractModel
+    @abstractmethod
+    def _set_model(self, model: Any) -> None:
+        pass
 
-    def __set_model(self, model: AbstractModel) -> None:
-        self.__model = model
+    @abstractmethod
+    def _set_scene(self, scene: Any) -> None:
+        pass
 
-    def __set_scene(self, scene: AbstractScene) -> None:
-        self.__scene = scene
+    @abstractmethod
+    def get_model(self) -> Any:
+        pass
 
-    def get_model(self) -> AbstractModel:
-        return self.__model
-
-    def get_scene(self) -> AbstractScene:
-        return self.__scene
+    @abstractmethod
+    def get_scene(self) -> Any:
+        pass

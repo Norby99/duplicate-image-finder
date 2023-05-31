@@ -1,13 +1,17 @@
+from typing import TypeVar, Any
+
+T = TypeVar('T', bound='Iterator')
+
 class Iterator:
 
-    def __init__(self, iterator):
+    def __init__(self: T, iterator: Any) -> None:
         self.iterator = iter(iterator)
         self.current = None
 
-    def __iter__(self):
+    def __iter__(self: T) -> T:
         return self
         
-    def __next__(self):
+    def __next__(self: T) -> Any:
         try:
             self.current = next(self.iterator)
         except StopIteration:

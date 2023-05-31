@@ -2,15 +2,17 @@ import tkinter as tk
 from PIL import Image
 import math
 
+import imagehash
+
 class ImageData:
      
     __path: str
     __name: str
     __size: str
     __dimensions: tuple
-    __hash: str
+    __hash: imagehash.ImageHash
 
-    def __init__(self, image_path: str, image_name: str, image_size: int, image_dimensions: tuple, hash: str) -> None:
+    def __init__(self, image_path: str, image_name: str, image_size: int, image_dimensions: tuple, hash: imagehash.ImageHash) -> None:
         self.__path = image_path
         self.__name = image_name
         self.__size = convert_size(image_size)
@@ -33,7 +35,7 @@ class ImageData:
     def get_dimensions(self) -> tuple:
         return self.__dimensions
     
-    def get_hash(self) -> str:
+    def get_hash(self) -> imagehash.ImageHash:
         return self.__hash
     
     def __str__(self) -> str:

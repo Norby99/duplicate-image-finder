@@ -8,14 +8,15 @@ class SetuperController(AbstractController):
     __model: Setupper
 
     def __init__(self, model: Setupper, scene: SceneSetupper) -> None:
-        self.__set_scene(scene)
-        self.__set_model(model)
+        self._set_scene(scene)
+        self._set_model(model)
+        print(type(self.get_model().set_variables))
         self.get_scene().subscribe(self.get_model().set_variables)
 
-    def __set_model(self, model: Setupper) -> None:
+    def _set_model(self, model: Setupper) -> None:
         self.__model = model
 
-    def __set_scene(self, scene: SceneSetupper) -> None:
+    def _set_scene(self, scene: SceneSetupper) -> None:
         self.__scene = scene
 
     def get_model(self) -> Setupper:

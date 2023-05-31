@@ -17,12 +17,9 @@ class Analiser(AbstractModel):
     __max_threads: int = 1
     __images: list[ImageData] = []
 
-    def __init__(self, core_count, image_folder) -> None:
+    def __init__(self, core_count: int, image_folder: str) -> None:
         self.__image_folder = image_folder
         self.__max_threads = core_count
-
-    def set_variables(self, image_folder, destination_path) -> None:
-        pass
 
     def load_images(self) -> None:
         images_path = self.__get_images_path()
@@ -36,32 +33,35 @@ class Analiser(AbstractModel):
         for thread in thread_list:
             thread.join()
 
-    def compare_images(self) -> None:
+    def compare_images(self) -> list[list[ImageData]]:
         #old_var = [images_name[i] for i, x in enumerate(images_hash) if images_hash.count(x) > 1] # O(n^2)
         #TODO: investigate for better performance
         old_var = defaultdict(list) # O(n)
         for i in self.__images:
             old_var[i.get_hash()].append(i)
-        old_var = {k:v for k,v in old_var.items() if len(v)>1}
+        old_var_2 = {k:v for k,v in old_var.items() if len(v)>1}
 
         self.__ready = True
 
-        return [[i for i in x] for x in old_var.values()]   # changing the index to the name outside of the loop above is a bit faster
+        return [[i for i in x] for x in old_var_2.values()]   # changing the index to the name outside of the loop above is a bit faster
 
-    def __threadable_load_images(self, images_path: list) -> None:
+    def __threadable_load_images(self, images_path: list[str]) -> None:
         for img in images_path:
             try:
                 image = Image.open(img[0])
                 self.__images.append(ImageData(img[0], img[1], stat(img[0]).st_size, image.size, imagehash.average_hash(image)))
+                print(type(imagehash.average_hash(image)))
+                exit()
             except Exception as e:
                 print(e.args)
-                warnings.warn(("Probably the file is damaged: ", img[1]))
+                warnings.warn("Probably the file is damaged: " + img[1])
 
-    def __get_images_path(self) -> None:
+    def __get_images_path(self) -> list[list[str]]:
         images_path = []
         for x in listdir(self.__image_folder):
             if x.endswith(self.__image_extension):
                 images_path.append([path.join(self.__image_folder, x), x])
+
         return images_path
 
     def ready(self) -> bool:
