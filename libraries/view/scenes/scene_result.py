@@ -10,12 +10,15 @@ class SceneResult(AbstractScene):
         __image2: ImageData
     
         __widgets: list = []
+
+        __extend_window_size: list[int] = [1200, 1000]
     
         def __init__(self) -> None:
             pass
     
         def setup(self, window: tk.Tk) -> None:
             self.__window = window
+            self.__window.geometry(str(self.__extend_window_size[0]) + "x"  + str(self.__extend_window_size[1]))
             self.__create_widgets()
 
         def set_image1(self, image: ImageData) -> None:
@@ -25,7 +28,7 @@ class SceneResult(AbstractScene):
             self.__image2 = image
     
         def __create_widgets(self) -> None:
-            self.__widgets.append(tk.Label(self.__window, text=self.__displayed_text))
+            # self.__widgets.append()
             self.__widgets[-1].pack()
     
         def destroy(self) -> None:

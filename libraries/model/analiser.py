@@ -50,7 +50,6 @@ class Analiser(AbstractModel):
             try:
                 image = Image.open(img[0])
                 self.__images.append(ImageData(img[0], img[1], stat(img[0]).st_size, image.size, imagehash.average_hash(image)))
-                print(type(imagehash.average_hash(image)))
                 exit()
             except Exception as e:
                 print(e.args)

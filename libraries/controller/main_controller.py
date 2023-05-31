@@ -35,10 +35,9 @@ class MainController:
         self.__app = MainView()
 
         self.update()
-
         self.main_loop()
 
-        self.__app.window.destroy()
+        self.__app.destroy()
 
     def main_loop(self) -> None:
         """ Main loop of the application. """
@@ -60,7 +59,6 @@ class MainController:
                 Analiser(self.__core_count, self.__data_collection.get_image_folder()), SceneAnaliser())
 
         elif self.__application_point.current == "results":
-            print("aaa")
             self.__current_controller = ResultController(ResultModel(), SceneResult())
         
         self.__app.set_scene(self.__current_controller.get_scene())

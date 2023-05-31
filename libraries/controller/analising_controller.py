@@ -19,7 +19,6 @@ class AnalisingController(AbstractController):
         self.get_model().load_images()
         self.get_scene().set_text("Images loaded. Comparing Images...")
         self.__duplicate_images = self.get_model().compare_images()
-        print(type(self.__duplicate_images))
         self.get_scene().set_text("Images compared.")
 
         for i in self.__duplicate_images:
