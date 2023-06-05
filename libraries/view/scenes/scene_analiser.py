@@ -7,7 +7,7 @@ class SceneAnaliser(AbstractScene):
     __label: tk.Label
 
     def __init__(self) -> None:
-        pass
+        self.set_text("Analysing...")
 
     def set_text(self, text: str) -> None:
         self.__label.configure(text=text)

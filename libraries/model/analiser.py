@@ -9,6 +9,8 @@ from threading import Thread
 from os import listdir, path, stat
 import warnings
 
+from threading import Thread
+
 class Analiser(AbstractModel):
 
     __image_folder: str = ""
