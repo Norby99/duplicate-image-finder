@@ -1,24 +1,28 @@
 from libraries.controller.abstract_controller import AbstractController
-
 from libraries.view.scenes.scene_setupper import SceneSetupper
-from libraries.view.scenes.abstract_scene import AbstractScene
-
-from libraries.model.abstract_model import AbstractModel
 from libraries.model.setupper import Setupper
-
 
 class SetuperController(AbstractController):
 
-    __scene: SceneSetupper = None
-    __model: Setupper = None
+    __scene: SceneSetupper
+    __model: Setupper
 
-    def __init__(self) -> None:
-        self.__scene = SceneSetupper()
-        self.__model = Setupper()
-        self.__scene.subscribe(self.__model.set_variables)
+    def __init__(self, model: Setupper, scene: SceneSetupper) -> None:
+        self._set_scene(scene)
+        self._set_model(model)
+        self.get_scene().subscribe(self.get_model().set_variables)
 
-    def get_model(self) -> AbstractModel:
+    def tick(self) -> bool:
+        return self.__model.ready()
+
+    def _set_model(self, model: Setupper) -> None:
+        self.__model = model
+
+    def _set_scene(self, scene: SceneSetupper) -> None:
+        self.__scene = scene
+
+    def get_model(self) -> Setupper:
         return self.__model
 
-    def get_scene(self) -> AbstractScene:
+    def get_scene(self) -> SceneSetupper:
         return self.__scene

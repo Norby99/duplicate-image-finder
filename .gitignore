@@ -1,2 +1,4 @@
 __pycache__
 Makefile
+.mypy_cache
+.vscode
