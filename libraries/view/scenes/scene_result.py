@@ -19,7 +19,7 @@ class SceneResult(AbstractScene):
         def setup(self, window: tk.Tk) -> None:
             print("aaaaa")
             self.__window = window
-            self.__window.geometry(str(self.__extend_window_size[0]) + "x"  + str(self.__extend_window_size[1]))
+            self.__window.geometry(str(self.__extend_window_size[0]) + "x" + str(self.__extend_window_size[1]))
             self.__packWidgets()
 
         def set_image1(self, image: ImageData) -> None:
