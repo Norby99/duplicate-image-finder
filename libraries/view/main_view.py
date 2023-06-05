@@ -13,17 +13,14 @@ class MainView():
 
     __analizing_methods: dict = { "Duplicate" : True, "Similar" : False }
     mini_window_size = [300, 200]
-    running: str = True
     __current_scene: AbstractScene = None
     
-    def __init__(self) -> None:
+    def __init__(self, window: tk.Tk) -> None:
 
-        self.__window = tk.Tk()
+        self.__window = window
         self.__window.title("Image Detector")
         self.__window.geometry(str(self.mini_window_size[0]) + "x" + str(self.mini_window_size[1]))
         self.__window.configure(background="white")
-
-        self.__window.protocol("WM_DELETE_WINDOW", self.set_stop_running)
 
     def set_scene(self, scene: AbstractScene) -> None:
         """ Sets the current scene of the application."""
@@ -78,9 +75,6 @@ class MainView():
         self.duplicate_images.pop(0)
         self.delete_all_image_related_widgets()
         self.create_result_widgets()
-
-    def update(self) -> None:
-        self.__window.update()
 
     def get_imageTk(self, image) -> ImageTk.PhotoImage:
         dim = self.get_image_dimensions(image)
@@ -139,13 +133,3 @@ class MainView():
         self.right_image_details.destroy()
 
         self.btn_skip.destroy()
-
-    def set_stop_running(self) -> None:
-        self.running = False
-
-    def destroy_buttons(self, btns) -> None:
-        for i in btns:
-            i.pack_forget()
-
-    def destroy(self) -> None:
-        self.__window.destroy()

@@ -1,6 +1,7 @@
 """ Main controller of the application. It is responsible for managing the application's flow. """
 
 import multiprocessing
+import tkinter as tk
 
 from libraries.view.main_view import MainView
 from libraries.utils.iterator import Iterator
@@ -25,6 +26,8 @@ class MainController:
     """ Main controller of the application.
     It is responsible for managing the application's flow. """
 
+    __root: tk.Tk
+
     __current_controller: AbstractController
     __data_collection: AbstractFolderCollector
     __duplicate_images: list[list[ImageData]]
@@ -35,21 +38,21 @@ class MainController:
 
     def __init__(self) -> None:
         self.__core_count = multiprocessing.cpu_count()
-        self.__app = MainView()
+        self.__root = tk.Tk()
+        self.__app = MainView(self.__root)
 
         self.update()
         self.main_loop()
 
-        self.__app.destroy()
+        self.__root.mainloop()
 
     def main_loop(self) -> None:
         """ Main loop of the application. """
-        while self.__app.running:
-            self.__app.update()
-            if self.__current_controller.get_model().ready():
-                self.__current_controller.get_scene().destroy()
-                self.update()
-
+        if self.__current_controller.get_model().ready():
+            self.__current_controller.get_scene().destroy()
+            self.update()
+        self.__root.after(100, self.main_loop)
+        
     def update(self) -> None:
         """ Updates the application's state. """
         next(self.__application_point)
