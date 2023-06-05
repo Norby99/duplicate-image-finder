@@ -11,6 +11,3 @@ class ResultModel(AbstractModel):
 
     def get_duplicate_images(self) -> list[list[ImageData]]:
         return self.__data_collector
-
-    def ready(self) -> bool:
-        return False

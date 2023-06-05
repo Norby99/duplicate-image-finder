@@ -48,14 +48,14 @@ class MainController:
 
     def main_loop(self) -> None:
         """ Main loop of the application. """
-        if self.__current_controller.get_model().ready():
+        if self.__current_controller.tick():
             self.__current_controller.get_scene().destroy()
             self.update()
         self.__root.after(100, self.main_loop)
         
     def update(self) -> None:
         """ Updates the application's state. """
-        next(self.__application_point)
+        self.__application_point.next()
         if self.__application_point.current == "file_chooser":     # choosing path
             self.__current_controller = SetuperController(Setupper(), SceneSetupper())
             self.__data_collection = self.__current_controller.get_model()

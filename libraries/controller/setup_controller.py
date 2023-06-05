@@ -12,6 +12,9 @@ class SetuperController(AbstractController):
         self._set_model(model)
         self.get_scene().subscribe(self.get_model().set_variables)
 
+    def tick(self) -> bool:
+        return self.__model.ready()
+
     def _set_model(self, model: Setupper) -> None:
         self.__model = model
 

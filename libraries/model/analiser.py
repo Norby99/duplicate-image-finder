@@ -13,7 +13,6 @@ class Analiser(AbstractModel):
 
     __image_folder: str = ""
     __image_extension: tuple = ('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')
-    __ready: bool = False
     __max_threads: int = 1
     __images: list[ImageData] = []
 
@@ -61,6 +60,3 @@ class Analiser(AbstractModel):
                 images_path.append([path.join(self.__image_folder, x), x])
 
         return images_path
-
-    def ready(self) -> bool:
-        return self.__ready

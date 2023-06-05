@@ -4,24 +4,21 @@ import tkinter as tk
 class SceneAnaliser(AbstractScene):
 
     __window: tk.Tk
-
-    __displayed_text: str = ""
-    __widgets: list = []
+    __label: tk.Label
 
     def __init__(self) -> None:
         pass
 
     def set_text(self, text: str) -> None:
-        self.__displayed_text = text
+        self.__label.configure(text=text)
 
     def setup(self, window: tk.Tk) -> None:
         self.__window = window
         self.__create_widgets()
 
     def __create_widgets(self) -> None:
-        self.__widgets.append(tk.Label(self.__window, text=self.__displayed_text))
-        self.__widgets[-1].pack()
+        self.__label = tk.Label(self.__window)
+        self.__label.pack()
 
     def destroy(self) -> None:
-        for i in self.__widgets:
-            i.destroy()
+        self.__label.destroy()

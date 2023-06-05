@@ -21,3 +21,7 @@ class AbstractController(ABC):
     @abstractmethod
     def get_scene(self) -> Any:
         pass
+
+    @abstractmethod
+    def tick(self) -> bool:
+        pass

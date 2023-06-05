@@ -18,3 +18,6 @@ class Iterator:
             self.current = None
         finally:
             return self.current
+        
+    def next(self: T) -> Any:
+        return self.__next__()

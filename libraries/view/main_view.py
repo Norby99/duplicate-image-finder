@@ -24,7 +24,7 @@ class MainView():
 
     def set_scene(self, scene: AbstractScene) -> None:
         """ Sets the current scene of the application."""
-        if self.__current_scene is not None:
+        if hasattr(self, "__current_scene"):
             self.__current_scene.destroy()
         self.__current_scene = scene
         self.__current_scene.setup(self.__window)
