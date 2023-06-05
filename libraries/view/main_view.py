@@ -3,7 +3,6 @@ from PIL import Image, ImageTk
 
 from libraries.view.scenes.abstract_scene import AbstractScene
 
-import math
 import shutil
 import os
 
@@ -27,6 +26,7 @@ class MainView():
         self.__window.protocol("WM_DELETE_WINDOW", self.set_stop_running)
 
     def set_scene(self, scene: AbstractScene) -> None:
+        """ Sets the current scene of the application."""
         if self.__current_scene is not None:
             self.__current_scene.destroy()
         self.__current_scene = scene

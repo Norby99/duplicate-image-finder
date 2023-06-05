@@ -1,7 +1,7 @@
 from libraries.model.abstract_model import AbstractModel
-from libraries.model.abstract_data_collector import AbstractDataCollector
+from libraries.model.abstract_data_collector import AbstractFolderCollector
 
-class Setupper(AbstractModel, AbstractDataCollector):
+class Setupper(AbstractModel, AbstractFolderCollector):
 
     __image_folder: str = ""
     __destination_path: str = ""

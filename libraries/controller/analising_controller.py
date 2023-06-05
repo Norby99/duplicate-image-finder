@@ -21,9 +21,6 @@ class AnalisingController(AbstractController):
         self.__duplicate_images = self.get_model().compare_images()
         self.get_scene().set_text("Images compared.")
 
-        for i in self.__duplicate_images:
-            print(str(i[0].get_size()) + " " + str(i[1].get_size()))
-
     def get_duplicate_images(self) -> list[list[ImageData]]:
         """ Returns the duplicate images. """
         return self.__duplicate_images
