@@ -13,7 +13,7 @@ class MainView():
 
     __analizing_methods: dict = { "Duplicate" : True, "Similar" : False }
     mini_window_size = [300, 200]
-    __current_scene: AbstractScene = None
+    __current_scene: AbstractScene
     
     def __init__(self, window: tk.Tk) -> None:
 
@@ -31,7 +31,8 @@ class MainView():
 
     def get_scene(self) -> AbstractScene:
         return self.__current_scene
-
+    
+    #! not used
     def create_result_widgets(self) -> None:
         if len(self.duplicate_images) > 0:
             self.__window.geometry(str(self.extend_window_size[0]) + "x" + str(self.extend_window_size[1]))
@@ -69,6 +70,7 @@ class MainView():
             self.label_loading.config(text="No duplicates found")
             self.label_loading.pack(pady=10, anchor="center")
 
+    #! not used
     def image_clicked(self, image_element, skip=False) -> None:
         if not skip:
             shutil.move(os.path.join(self.__image_folder, self.duplicate_images[0][image_element]), os.path.join(self.__destination_path, self.duplicate_images[0][image_element]))
@@ -76,15 +78,18 @@ class MainView():
         self.delete_all_image_related_widgets()
         self.create_result_widgets()
 
+    #! not used
     def get_imageTk(self, image) -> ImageTk.PhotoImage:
         dim = self.get_image_dimensions(image)
         return ImageTk.PhotoImage(image.resize((dim[0], dim[1]), Image.ANTIALIAS))
 
+    #! not used
     def resize(self) -> None:
         if not hasattr(self, "left_image"):
             return 
         self.__set_image_selection_position_and_size()
-        
+    
+    #! not used
     def __set_image_selection_position_and_size(self) -> None:
         self.tk_image1 = self.get_imageTk(self.image1)
         self.left_image.config(image=self.tk_image1)
@@ -100,6 +105,7 @@ class MainView():
 
         self.btn_skip.place(x=self.__window.winfo_width()/2, y=self.__window.winfo_height() - 20, anchor='center')
 
+    #! not used
     def get_image_dimensions(self, img) -> list:
         img_proportion = img.size[0] / img.size[1]
         lower_border_size = 100
@@ -113,6 +119,7 @@ class MainView():
         dimension = [x, y]
         return dimension
 
+    #! not used
     def detects_resize(self):
         if hasattr(self, "last_size"):
             if self.last_size != self.__window.winfo_width() + self.__window.winfo_height():
@@ -123,6 +130,7 @@ class MainView():
         else:
             self.last_size = [self.__window.winfo_width(), self.__window.winfo_height()]
 
+    #! not used
     def delete_all_image_related_widgets(self) -> None:
         self.left_image.destroy()
         self.left_image_label.destroy()
