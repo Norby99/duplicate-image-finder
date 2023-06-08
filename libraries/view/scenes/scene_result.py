@@ -32,8 +32,8 @@ class SceneResult(AbstractScene):
         def __set_image2(self, image: ImageData) -> None:
             self.__image2 = image
             photo = ImageTk.PhotoImage(self.__image2.get_image())
-            self.__widgets["left_img"].configure(image=photo)   # type: ignore
-            self.__widgets["left_img"].image = photo    # type: ignore  # it is necessary to keep a reference to the image
+            self.__widgets["right_img"].configure(image=photo)   # type: ignore
+            self.__widgets["right_img"].image = photo    # type: ignore  # it is necessary to keep a reference to the image
 
         def set_images(self, images: list[ImageData]) -> None:
             if len(images) != 2:
