@@ -6,7 +6,7 @@ from libraries.controller.abstract_controller import AbstractController
 from libraries.view.scenes.scene_analiser import SceneAnaliser
 from libraries.model.analiser import Analiser
 from libraries.utils.image_data import ImageData
-from libraries.controller.providers.duplicate_images_provider import DuplicateImagesProvider
+from libraries.model.providers.duplicate_images_provider import DuplicateImagesProvider
 
 from libraries.utils.iterator import Iterator
 
@@ -28,7 +28,6 @@ class AnalisingController(AbstractController):
         if not hasattr(self, "_"+self.__class__.__name__+"__working_thread") or not self.__working_thread.is_alive():
             self.__stages.next()
             self.__main()
-            return False
         return self.__stages.current == "done"
     
     def __main(self) -> None:

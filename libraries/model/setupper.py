@@ -1,5 +1,5 @@
 from libraries.model.abstract_model import AbstractModel
-from libraries.controller.providers.folder_provider import FolderProvider
+from libraries.model.providers.folder_provider import FolderProvider
 
 class Setupper(AbstractModel, FolderProvider):
 

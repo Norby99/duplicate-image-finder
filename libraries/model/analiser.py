@@ -1,6 +1,6 @@
 from libraries.model.abstract_model import AbstractModel
 from libraries.utils.image_data import ImageData
-from libraries.controller.providers.duplicate_images_provider import DuplicateImagesProvider
+from libraries.model.providers.duplicate_images_provider import DuplicateImagesProvider
 
 import imagehash
 from PIL import Image

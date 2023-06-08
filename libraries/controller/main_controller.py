@@ -11,7 +11,7 @@ from libraries.controller.setup_controller import SetuperController
 from libraries.controller.analising_controller import AnalisingController
 from libraries.controller.result_controller import ResultController
 
-from libraries.controller.providers.folder_provider import FolderProvider
+from libraries.model.providers.folder_provider import FolderProvider
 from libraries.model.setupper import Setupper
 from libraries.model.analiser import Analiser
 from libraries.model.result_model import ResultModel
@@ -20,7 +20,7 @@ from libraries.view.scenes.scene_setupper import SceneSetupper
 from libraries.view.scenes.scene_analiser import SceneAnaliser
 from libraries.view.scenes.scene_result import SceneResult
 
-from libraries.controller.providers.duplicate_images_provider import DuplicateImagesProvider
+from libraries.model.providers.duplicate_images_provider import DuplicateImagesProvider
 
 class MainController:
     """ Main controller of the application.
