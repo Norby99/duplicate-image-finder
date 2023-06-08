@@ -16,8 +16,8 @@ class ResultController(AbstractController):
                 self.__scene.set_image1(i[0])
                 self.__scene.set_image2(i[1])
 
-    def tick(self) -> None:
-        pass
+    def tick(self) -> bool:
+        return False
 
     def _set_model(self, model: ResultModel) -> None:
         self.__model = model

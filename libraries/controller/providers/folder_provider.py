@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class AbstractFolderCollector(ABC):
+class FolderProvider(ABC):
 
     @abstractmethod
     def get_image_folder(self) -> str:

@@ -11,7 +11,7 @@ from libraries.controller.setup_controller import SetuperController
 from libraries.controller.analising_controller import AnalisingController
 from libraries.controller.result_controller import ResultController
 
-from libraries.model.abstract_data_collector import AbstractFolderCollector
+from libraries.controller.providers.folder_provider import FolderProvider
 from libraries.model.setupper import Setupper
 from libraries.model.analiser import Analiser
 from libraries.model.result_model import ResultModel
@@ -20,7 +20,7 @@ from libraries.view.scenes.scene_setupper import SceneSetupper
 from libraries.view.scenes.scene_analiser import SceneAnaliser
 from libraries.view.scenes.scene_result import SceneResult
 
-from libraries.utils.image_data import ImageData
+from libraries.controller.providers.duplicate_images_provider import DuplicateImagesProvider
 
 class MainController:
     """ Main controller of the application.
@@ -29,8 +29,8 @@ class MainController:
     __root: tk.Tk
 
     __current_controller: AbstractController
-    __data_collection: AbstractFolderCollector
-    __duplicate_images: list[list[ImageData]]
+    __data_collection: FolderProvider
+    __duplicate_images: DuplicateImagesProvider
     __app: MainView
     __application_point: Iterator = Iterator(
         ["file_chooser", "analizing", "results"])
@@ -63,9 +63,9 @@ class MainController:
         elif self.__application_point.current == "analizing":
             self.__current_controller = AnalisingController(
                 Analiser(self.__core_count, self.__data_collection.get_image_folder()), SceneAnaliser())
-            self.__duplicate_images = self.__current_controller.get_duplicate_images()
+            self.__duplicate_images = self.__current_controller
 
         elif self.__application_point.current == "results":
-            self.__current_controller = ResultController(ResultModel(self.__duplicate_images), SceneResult())
+            self.__current_controller = ResultController(ResultModel(self.__duplicate_images.get_duplicate_images()), SceneResult())
 
         self.__app.set_scene(self.__current_controller.get_scene())

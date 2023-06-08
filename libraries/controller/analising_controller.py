@@ -6,10 +6,11 @@ from libraries.controller.abstract_controller import AbstractController
 from libraries.view.scenes.scene_analiser import SceneAnaliser
 from libraries.model.analiser import Analiser
 from libraries.utils.image_data import ImageData
+from libraries.controller.providers.duplicate_images_provider import DuplicateImagesProvider
 
 from libraries.utils.iterator import Iterator
 
-class AnalisingController(AbstractController):
+class AnalisingController(AbstractController, DuplicateImagesProvider):
     """ Analising Controller """
 
     __duplicate_images: list[list[ImageData]] = []
@@ -24,7 +25,7 @@ class AnalisingController(AbstractController):
     def tick(self) -> bool:
         """ Tick of the controller.
             Returns True if the controller is ready. """
-        if not hasattr(self, "__working_thread") or not self.__working_thread.is_alive():
+        if not hasattr(self, "_"+self.__class__.__name__+"__working_thread") or not self.__working_thread.is_alive():
             self.__stages.next()
             self.__main()
             return False
@@ -40,6 +41,7 @@ class AnalisingController(AbstractController):
             self.__working_thread = threading.Thread(target=self.__model.compare_images)
             self.__working_thread.start()
         elif self.__stages.current == "done":
+            self.__duplicate_images = self.__model.get_duplicate_images()
             self.get_scene().set_text("Done!")
 
     def get_duplicate_images(self) -> list[list[ImageData]]:

@@ -18,6 +18,8 @@ class Analiser(AbstractModel):
     __max_threads: int = 1
     __images: list[ImageData] = []
 
+    __duplicates: list[list[ImageData]]
+
     def __init__(self, core_count: int, image_folder: str) -> None:
         self.__image_folder = image_folder
         self.__max_threads = core_count
@@ -34,7 +36,7 @@ class Analiser(AbstractModel):
         for thread in thread_list:
             thread.join()
 
-    def compare_images(self) -> list[list[ImageData]]:
+    def compare_images(self) -> None:
         #old_var = [images_name[i] for i, x in enumerate(images_hash) if images_hash.count(x) > 1] # O(n^2)
         #TODO: investigate for better performance
         old_var = defaultdict(list) # O(n)
@@ -42,9 +44,10 @@ class Analiser(AbstractModel):
             old_var[i.get_hash()].append(i)
         old_var_2 = {k:v for k,v in old_var.items() if len(v)>1}
 
-        self.__ready = True
-
-        return [[i for i in x] for x in old_var_2.values()]   # changing the index to the name outside of the loop above is a bit faster
+        self.__duplicates = [[i for i in x] for x in old_var_2.values()]   # changing the index to the name outside of the loop above is a bit faster
+    
+    def get_duplicate_images(self) -> list[list[ImageData]]:
+        return self.__duplicates
 
     def __threadable_load_images(self, images_path: list[str]) -> None:
         for img in images_path:

@@ -14,11 +14,11 @@ class SceneResult(AbstractScene):
         __extend_window_size: list[int] = [1200, 1000]
     
         def __init__(self) -> None:
-            self.__create_widgets()
+            pass
     
         def setup(self, window: tk.Tk) -> None:
-            print("aaaaa")
             self.__window = window
+            self.__create_widgets()
             self.__window.geometry(str(self.__extend_window_size[0]) + "x" + str(self.__extend_window_size[1]))
             self.__packWidgets()
 
