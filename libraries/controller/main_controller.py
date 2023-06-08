@@ -63,7 +63,7 @@ class MainController:
         elif self.__application_point.current == "analizing":
             self.__current_controller = AnalisingController(
                 Analiser(self.__core_count, self.__data_collection.get_image_folder()), SceneAnaliser())
-            self.__duplicate_images = self.__current_controller
+            self.__duplicate_images = self.__current_controller.get_model()
 
         elif self.__application_point.current == "results":
             self.__current_controller = ResultController(ResultModel(self.__duplicate_images.get_duplicate_images()), SceneResult())

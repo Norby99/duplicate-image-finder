@@ -1,5 +1,6 @@
 from libraries.model.abstract_model import AbstractModel
 from libraries.utils.image_data import ImageData
+from libraries.controller.providers.duplicate_images_provider import DuplicateImagesProvider
 
 import imagehash
 from PIL import Image
@@ -11,7 +12,7 @@ import warnings
 
 from threading import Thread
 
-class Analiser(AbstractModel):
+class Analiser(AbstractModel, DuplicateImagesProvider):
 
     __image_folder: str = ""
     __image_extension: tuple = ('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')

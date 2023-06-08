@@ -10,7 +10,7 @@ from libraries.controller.providers.duplicate_images_provider import DuplicateIm
 
 from libraries.utils.iterator import Iterator
 
-class AnalisingController(AbstractController, DuplicateImagesProvider):
+class AnalisingController(AbstractController):
     """ Analising Controller """
 
     __duplicate_images: list[list[ImageData]] = []
@@ -41,12 +41,7 @@ class AnalisingController(AbstractController, DuplicateImagesProvider):
             self.__working_thread = threading.Thread(target=self.__model.compare_images)
             self.__working_thread.start()
         elif self.__stages.current == "done":
-            self.__duplicate_images = self.__model.get_duplicate_images()
             self.get_scene().set_text("Done!")
-
-    def get_duplicate_images(self) -> list[list[ImageData]]:
-        """ Returns the duplicate images. """
-        return self.__duplicate_images
     
     def _set_model(self, model: Analiser) -> None:
         self.__model = model
