@@ -1,4 +1,4 @@
-import tkinter as tk
+from typing import Union
 from PIL import Image
 import math
 
@@ -12,16 +12,20 @@ class ImageData:
     __dimensions: tuple
     __hash: imagehash.ImageHash
 
-    def __init__(self, image_path: str, image_name: str, image_size: int, image_dimensions: tuple, hash: imagehash.ImageHash) -> None:
+    def __init__(self, image_path: str, image_name: str, image_size: Union[int, str], image_dimensions: tuple, hash: imagehash.ImageHash) -> None:
         self.__path = image_path
         self.__name = image_name
-        self.__size = convert_size(image_size)
+        self.__size = image_size if isinstance(image_size, str) else convert_size(image_size)
         self.__dimensions = image_dimensions
         self.__hash = hash
-    
-    def get_image(self) -> tk.PhotoImage:
+
+    def get_image(self, size: list[int]=[0, 0]) -> Image:
         # the image is not loaded into memory until this method is called
-        return Image.open(self.__path)
+        # TODO if the image is already in memory, don't load it, just return it
+        if size == [0, 0]:
+            return Image.open(self.__path)
+        else:
+            return Image.open(self.__path).resize((size[0], size[1]), Image.ANTIALIAS)
     
     def get_path(self) -> str:
         return self.__path
@@ -34,6 +38,9 @@ class ImageData:
     
     def get_dimensions(self) -> tuple:
         return self.__dimensions
+    
+    def get_image_proportion(self) -> float:
+        return self.__dimensions[0] / self.__dimensions[1]
     
     def get_hash(self) -> imagehash.ImageHash:
         return self.__hash
