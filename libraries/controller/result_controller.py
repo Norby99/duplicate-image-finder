@@ -17,6 +17,8 @@ class ResultController(AbstractController):
     def tick(self) -> bool:
         if self.__current_images == []:
             self.__set_next_images()
+        if self.__scene.detects_resize():
+            self.__scene.resize_window_elements()
         return False
     
     def __set_next_images(self) -> None:
