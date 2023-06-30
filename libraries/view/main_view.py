@@ -79,17 +79,6 @@ class MainView():
         self.create_result_widgets()
 
     #! not used
-    def get_imageTk(self, image) -> ImageTk.PhotoImage:
-        dim = self.get_image_dimensions(image)
-        return ImageTk.PhotoImage(image.resize((dim[0], dim[1]), Image.ANTIALIAS))
-
-    #! not used
-    def resize(self) -> None:
-        if not hasattr(self, "left_image"):
-            return 
-        self.__set_image_selection_position_and_size()
-    
-    #! not used
     def __set_image_selection_position_and_size(self) -> None:
         self.tk_image1 = self.get_imageTk(self.image1)
         self.left_image.config(image=self.tk_image1)
@@ -104,40 +93,3 @@ class MainView():
         self.right_image_details.place(x=self.__window.winfo_width()-10, y=self.__window.winfo_height() - 20, anchor='se')
 
         self.btn_skip.place(x=self.__window.winfo_width()/2, y=self.__window.winfo_height() - 20, anchor='center')
-
-    #! not used
-    def get_image_dimensions(self, img) -> list:
-        img_proportion = img.size[0] / img.size[1]
-        lower_border_size = 100
-        x = int(self.__window.winfo_width() // 2)
-        y = int(x // img_proportion)
-
-        if (y > self.__window.winfo_height() - lower_border_size):
-            y = self.__window.winfo_height() - lower_border_size
-            x = int(y * img_proportion)
-
-        dimension = [x, y]
-        return dimension
-
-    #! not used
-    def detects_resize(self):
-        if hasattr(self, "last_size"):
-            if self.last_size != self.__window.winfo_width() + self.__window.winfo_height():
-                self.last_size = self.__window.winfo_width() + self.__window.winfo_height()
-                return True
-            else:
-                return False
-        else:
-            self.last_size = [self.__window.winfo_width(), self.__window.winfo_height()]
-
-    #! not used
-    def delete_all_image_related_widgets(self) -> None:
-        self.left_image.destroy()
-        self.left_image_label.destroy()
-        self.left_image_details.destroy()
-        
-        self.right_image.destroy()
-        self.right_image_label.destroy()
-        self.right_image_details.destroy()
-
-        self.btn_skip.destroy()
