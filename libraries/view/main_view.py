@@ -77,19 +77,3 @@ class MainView():
         self.duplicate_images.pop(0)
         self.delete_all_image_related_widgets()
         self.create_result_widgets()
-
-    #! not used
-    def __set_image_selection_position_and_size(self) -> None:
-        self.tk_image1 = self.get_imageTk(self.image1)
-        self.left_image.config(image=self.tk_image1)
-        self.left_image.place(anchor="nw", x=10, y=20)
-        self.left_image_label.place(anchor="nw", x=0, y=0)
-        self.left_image_details.place(anchor="sw", x=0, y=self.__window.winfo_height() - 20)
-
-        self.tk_image2 = self.get_imageTk(self.image2)
-        self.right_image.config(image=self.tk_image2)
-        self.right_image.place(anchor="ne", x=self.__window.winfo_width()-10, y=20)
-        self.right_image_label.place(x=self.__window.winfo_width()-10, y=0, anchor='ne')
-        self.right_image_details.place(x=self.__window.winfo_width()-10, y=self.__window.winfo_height() - 20, anchor='se')
-
-        self.btn_skip.place(x=self.__window.winfo_width()/2, y=self.__window.winfo_height() - 20, anchor='center')
