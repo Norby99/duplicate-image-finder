@@ -3,6 +3,8 @@ from libraries.utils.image_data import ImageData
 from libraries.view.scenes.scene_result import SceneResult
 from libraries.model.result_model import ResultModel
 
+from libraries.controller.observable import Observable
+
 class ResultController(AbstractController):
     
     __model: ResultModel
@@ -14,6 +16,8 @@ class ResultController(AbstractController):
         self._set_scene(scene)
         self._set_model(model)
 
+        self.get_scene().set_image_remover(Observable([self.remove_image]))
+
     def tick(self) -> bool:
         if self.__current_images == []:
             self.__set_next_images()
@@ -23,7 +27,14 @@ class ResultController(AbstractController):
     
     def __set_next_images(self) -> None:
         self.__current_images = self.__model.get_next_two_images()
-        self.__scene.set_images(self.__current_images)
+        self.__scene.set_images(self.__current_images[0], self.__current_images[1])
+
+    def remove_image(self, image_index: int) -> None:
+        """ Remove the image with the given index,
+            if image_index is -1, remove both images but only from scene """
+        if image_index == -1:
+            pass
+        print("remove image")
 
     def _set_model(self, model: ResultModel) -> None:
         self.__model = model
