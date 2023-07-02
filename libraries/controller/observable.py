@@ -1,18 +1,19 @@
 from typing import Callable, Any
 
 class Observable(object):
+    """ Observer pattern implementation
+        You can implement this class in 2 ways:
+        1. Inherit from this class and call the subscribe-fire method
+        2. Create an instance of this class and call the subscribe-fire method
+    """
 
-    __callbacks: list = []
+    __callback: Callable
 
-    def __init__(self, functions: list[Callable] = []) -> None:
-        self.__callbacks = functions
+    def __init__(self, function: Callable) -> None:
+        self.__callback = function
 
     def subscribe(self, callback: Callable) -> None:
-        self.__callbacks.append(callback)
+        self.__callback = callback
 
     def fire(self, **attrs: Any) -> None:
-        for fn in self.__callbacks:
-            fn(**attrs)
-
-    def unsubscribe(self) -> None:
-        self.__callbacks.clear()
+        self.__callback(**attrs)
