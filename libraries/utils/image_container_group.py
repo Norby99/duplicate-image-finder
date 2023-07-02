@@ -47,3 +47,7 @@ class ImageContainerGroup():
 
         dimension = [x, y]
         return dimension
+    
+    def destroy(self) -> None:
+        self.__lb_img.destroy()
+        self.__lb_details.destroy()
