@@ -16,7 +16,7 @@ class ResultController(AbstractController):
         self._set_scene(scene)
         self._set_model(model)
 
-        self.get_scene().set_image_remover(Observable([self.remove_image]))
+        self.get_scene().subscribe(self.remove_image)
 
     def tick(self) -> bool:
         if self.__current_images == []:

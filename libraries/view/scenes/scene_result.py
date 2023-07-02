@@ -27,9 +27,6 @@ class SceneResult(AbstractScene, Observable):
             self.__create_widgets()
             self.__window.geometry(str(self.__extend_window_size[0]) + "x" + str(self.__extend_window_size[1]))
 
-        def set_image_remover(self, image_remover: Observable) -> None:
-            self.__image_remover = image_remover
-
         def set_images(self, image1: ImageData, image2: ImageData) -> None:
             self.__img1 = ImageContainerGroup(image1, self.__window)
             self.__img1.setup_widgets([0, 0], "w")
@@ -46,10 +43,8 @@ class SceneResult(AbstractScene, Observable):
             self.__btn_skip.place(x=self.__window.winfo_width()/2, y=self.__window.winfo_height() - 20, anchor='center')
     
         def __create_widgets(self) -> None:
-            self.__btn_skip = tk.Button(self.__window, text="Skip", command=lambda: self.__send_form())
+            self.__btn_skip = tk.Button(self.__window, text="Skip", command=lambda: self.fire(image_index=-1))
             self.__btn_skip.grid()
-
-        def __send_form(self) -> None:
 
         def detects_resize(self) -> bool:
             if self.__last_size != [self.__window.winfo_width(), self.__window.winfo_height()]:
