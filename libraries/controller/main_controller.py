@@ -33,7 +33,7 @@ class MainController:
     __duplicate_images: DuplicateImagesProvider
     __app: MainView
     __application_point: Iterator = Iterator(
-        ["file_chooser", "analizing", "results"])
+        ["file_chooser", "analizing", "results", "end"])
     __core_count = 1
 
     def __init__(self) -> None:
@@ -67,5 +67,8 @@ class MainController:
 
         elif self.__application_point.current == "results":
             self.__current_controller = ResultController(ResultModel(self.__duplicate_images.get_duplicate_images(), self.__data_collection), SceneResult())
+
+        elif self.__application_point.current == "end":
+            pass
 
         self.__app.set_scene(self.__current_controller.get_scene())

@@ -1,6 +1,6 @@
 from libraries.view.scenes.abstract_scene import AbstractScene
 from libraries.utils.image_data import ImageData
-from libraries.utils.image_container_group import ImageContainerGroup
+from libraries.view.image_container_group import ImageContainerGroup
 import tkinter as tk
 
 from libraries.controller.observable import Observable

@@ -19,14 +19,18 @@ class ResultController(AbstractController):
 
     def tick(self) -> bool:
         if self.__current_images == []:
-            self.__set_next_images()
+            if not self.__set_next_images():
+                return True
         if self.__scene.detects_resize():
             self.__scene.resize_window_elements()
         return False
     
-    def __set_next_images(self) -> None:
+    def __set_next_images(self) -> bool:
         self.__current_images = self.__model.get_next_two_images()
+        if len(self.__current_images) == 0:
+            return False
         self.__scene.set_images(self.__current_images[0], self.__current_images[1])
+        return True
 
     def remove_image(self, image: Union[None, ImageData]) -> None:
         if image is not None:
