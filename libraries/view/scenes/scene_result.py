@@ -9,8 +9,6 @@ class SceneResult(AbstractScene, Observable):
     
         __window: tk.Tk
 
-        __image_remover: Observable
-
         __img1: ImageContainerGroup
         __img2: ImageContainerGroup
     
@@ -28,10 +26,10 @@ class SceneResult(AbstractScene, Observable):
             self.__window.geometry(str(self.__extend_window_size[0]) + "x" + str(self.__extend_window_size[1]))
 
         def set_images(self, image1: ImageData, image2: ImageData) -> None:
-            self.__img1 = ImageContainerGroup(image1, self.__window)
+            self.__img1 = ImageContainerGroup(image1, self.__window, self)
             self.__img1.setup_widgets([0, 0], "w")
 
-            self.__img2 = ImageContainerGroup(image2, self.__window)
+            self.__img2 = ImageContainerGroup(image2, self.__window, self)
             self.__img2.setup_widgets([0, 1], "e")
 
             self.resize_window_elements()
