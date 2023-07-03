@@ -4,7 +4,7 @@ from libraries.model.providers.duplicate_images_provider import DuplicateImagesP
 from libraries.model.providers.folder_provider import FolderProvider
 from libraries.utils.image_data import ImageData
 
-import shutil
+import shutil, os
 
 class ResultModel(AbstractModel, DuplicateImagesProvider):
 
@@ -33,7 +33,15 @@ class ResultModel(AbstractModel, DuplicateImagesProvider):
         for i in self.__data_collector:
             if image_data in i:
                 i.remove(image_data)
+                if len(i) == 1:
+                    self.__data_collector.remove(i)
                 break
     
     def delete_image(self, image_data: ImageData) -> None:
-        shutil.move(image_data.get_path(), self.__folder_provider.get_destination_path())
+        if not self.__check_image_path(image_data):
+            shutil.move(image_data.get_path(), self.__folder_provider.get_destination_path())
+        else:
+            print("Image already in destination folder")
+
+    def __check_image_path(self, image_data: ImageData) -> bool:
+        return image_data.get_path() == os.path.join(self.__folder_provider.get_destination_path(), image_data.get_name())
