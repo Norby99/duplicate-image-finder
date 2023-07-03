@@ -1,10 +1,6 @@
 import tkinter as tk
-from PIL import Image, ImageTk
 
 from libraries.view.scenes.abstract_scene import AbstractScene
-
-import shutil
-import os
 
 #TODO: this class needs a lot of refactoring
 class MainView():
@@ -26,54 +22,13 @@ class MainView():
         """ Sets the current scene of the application."""
         if hasattr(self, "__current_scene"):
             self.__current_scene.destroy()
+            self.__window.geometry(str(self.mini_window_size[0]) + "x" + str(self.mini_window_size[1]))
         self.__current_scene = scene
         self.__current_scene.setup(self.__window)
 
     def get_scene(self) -> AbstractScene:
         return self.__current_scene
     
-    #! not used
-    def create_result_widgets(self) -> None:
-        if len(self.duplicate_images) > 0:
-            self.__window.geometry(str(self.extend_window_size[0]) + "x" + str(self.extend_window_size[1]))
-            images = self.duplicate_images[0]
-
-            img_path1 = os.path.join(self.__image_folder, images[0])
-            self.image1 = Image.open(img_path1)
-            self.tk_image1 = self.get_imageTk(self.image1)
-            self.left_image = tk.Label(self.__window, image=self.tk_image1, background="white")
-            self.left_image.bind("<Button-1>", lambda event: self.image_clicked(0))
-            self.left_image_label = tk.Label(self.__window, text=images[0], font=("Helvetica", 12), background="white")
-
-            text = "Size: " + str(self.image1.size[0]) + " x " + str(self.image1.size[1]) + "\nDimension= " + convert_size(os.stat(img_path1).st_size)
-            self.left_image_details = tk.Label(self.__window, text=text, font=("Helvetica", 12), background="white")
-
-            img_path2 = os.path.join(self.__image_folder, images[1])
-            self.image2 = Image.open(img_path2)
-            self.tk_image2 = self.get_imageTk(self.image2)
-            self.right_image = tk.Label(self.__window, image=self.tk_image1, background="white")
-            self.right_image.bind("<Button-1>", lambda event: self.image_clicked(1))
-            self.right_image_label = tk.Label(self.__window, text=images[1], font=("Helvetica", 12), background="white")
-
-            text = "Size: " + str(self.image2.size[0]) + " x " + str(self.image2.size[1]) + "\nDimension= " + convert_size(os.stat(img_path2).st_size)
-            self.right_image_details = tk.Label(self.__window, text=text, font=("Helvetica", 12), background="white")
-            
-            self.btn_skip = tk.Button(self.__window, text="Skip", command=lambda: self.image_clicked(None, skip=True))
-
-            self.__set_image_selection_position_and_size()
-
-        else :
-            if hasattr(self, "left_image"):
-                self.delete_all_image_related_widgets()
-
-            self.__window.geometry(str(self.mini_window_size[0]) + "x" + str(self.mini_window_size[1]))
-            self.label_loading.config(text="No duplicates found")
-            self.label_loading.pack(pady=10, anchor="center")
-
-    #! not used
-    def image_clicked(self, image_element, skip=False) -> None:
-        if not skip:
-            shutil.move(os.path.join(self.__image_folder, self.duplicate_images[0][image_element]), os.path.join(self.__destination_path, self.duplicate_images[0][image_element]))
-        self.duplicate_images.pop(0)
-        self.delete_all_image_related_widgets()
-        self.create_result_widgets()
+    def destroy(self) -> None:
+        self.__current_scene.destroy()
+        self.__window.destroy()
