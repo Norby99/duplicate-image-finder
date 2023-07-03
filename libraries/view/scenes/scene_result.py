@@ -43,7 +43,7 @@ class SceneResult(AbstractScene, Observable):
             self.__btn_skip.place(x=self.__window.winfo_width()/2, y=self.__window.winfo_height() - 20, anchor='center')
     
         def __create_widgets(self) -> None:
-            self.__btn_skip = tk.Button(self.__window, text="Skip", command=lambda: self.fire(image_index=-1))
+            self.__btn_skip = tk.Button(self.__window, text="Skip", command=lambda: self.fire(image=None))
             self.__btn_skip.grid()
 
         def detects_resize(self) -> bool:

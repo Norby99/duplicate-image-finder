@@ -66,6 +66,6 @@ class MainController:
             self.__duplicate_images = self.__current_controller.get_model()
 
         elif self.__application_point.current == "results":
-            self.__current_controller = ResultController(ResultModel(self.__duplicate_images.get_duplicate_images()), SceneResult())
+            self.__current_controller = ResultController(ResultModel(self.__duplicate_images.get_duplicate_images(), self.__data_collection), SceneResult())
 
         self.__app.set_scene(self.__current_controller.get_scene())
