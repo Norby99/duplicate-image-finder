@@ -19,7 +19,7 @@ class ImageData:
         self.__dimensions = image_dimensions
         self.__hash = hash
 
-    def get_image(self, size: list[int]=[0, 0]) -> Image:
+    def get_image(self, size: list[int]=[0, 0]) -> Image: # type: ignore
         # the image is not loaded into memory until this method is called
         # TODO if the image is already in memory, don't load it, just return it
         if size == [0, 0]:
