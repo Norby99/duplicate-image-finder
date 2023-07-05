@@ -10,6 +10,7 @@ from libraries.controller.abstract_controller import AbstractController
 from libraries.controller.setup_controller import SetuperController
 from libraries.controller.analising_controller import AnalisingController
 from libraries.controller.result_controller import ResultController
+from libraries.controller.end_controller import EndController
 
 from libraries.model.providers.folder_provider import FolderProvider
 from libraries.model.setupper import Setupper
@@ -19,6 +20,7 @@ from libraries.model.result_model import ResultModel
 from libraries.view.scenes.scene_setupper import SceneSetupper
 from libraries.view.scenes.scene_analiser import SceneAnaliser
 from libraries.view.scenes.scene_result import SceneResult
+from libraries.view.scenes.scene_end import SceneEnd
 
 from libraries.model.providers.duplicate_images_provider import DuplicateImagesProvider
 
@@ -68,6 +70,6 @@ class MainController:
             self.__current_controller = ResultController(ResultModel(self.__duplicate_images.get_duplicate_images(), self.__data_collection), SceneResult())
 
         elif self.__application_point.current == "end":
-            pass
+            self.__current_controller = EndController(SceneEnd())
 
         self.__app.set_scene(self.__current_controller.get_scene())
