@@ -33,6 +33,7 @@ class ResultController(AbstractController):
         return True
 
     def remove_image(self, image: Union[None, ImageData]) -> None:
+        self.get_scene().destroy(destroy_btn_skip=False)
         if image is not None:
             self.get_model().remove_image(image)
             self.get_model().delete_image(image)

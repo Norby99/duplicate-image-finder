@@ -32,8 +32,6 @@ class SceneResult(AbstractScene, Observable):
             self.__img2 = ImageContainerGroup(image2, self.__window, self)
             self.__img2.setup_widgets([0, 1], "e")
 
-            self.resize_window_elements()
-
         def resize_window_elements(self) -> None:
             self.__img1.resize()
             self.__img2.resize()
@@ -41,7 +39,7 @@ class SceneResult(AbstractScene, Observable):
             self.__btn_skip.place(x=self.__window.winfo_width()/2, y=self.__window.winfo_height() - 20, anchor='center')
     
         def __create_widgets(self) -> None:
-            self.__btn_skip = tk.Button(self.__window, text="Skip", command=lambda: self.fire(image=None))
+            self.__btn_skip = tk.Button(self.__window, text="Skip", command=lambda: self.__send_skip_form())
             self.__btn_skip.grid()
 
         def detects_resize(self) -> bool:
@@ -49,8 +47,13 @@ class SceneResult(AbstractScene, Observable):
                 self.__last_size = [self.__window.winfo_width(), self.__window.winfo_height()]
                 return True 
             return False
+        
+        def __send_skip_form(self) -> None:
+            self.fire(image=None)
+            self.destroy(destroy_btn_skip=False)
 
-        def destroy(self) -> None:
-            self.__btn_skip.destroy()
+        def destroy(self, destroy_btn_skip: bool=True) -> None:
+            if destroy_btn_skip:
+                self.__btn_skip.destroy()
             self.__img1.destroy()
             self.__img2.destroy()
