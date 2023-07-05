@@ -16,7 +16,7 @@ class SceneEnd(AbstractScene):
         self.__create_widgets()
 
     def __create_widgets(self) -> None:
-        self.__lb_no_more_images = tk.Label(self.__window, text="No more images to analize", font=("Arial", 20))
+        self.__lb_no_more_images = tk.Label(self.__window, text="No more images to analize", font=("Arial", 11))
         self.__lb_no_more_images.place(relx=.5, rely=.5, anchor="center")
 
     def destroy(self) -> None:
