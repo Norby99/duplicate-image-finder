@@ -49,7 +49,6 @@ class MainController:
     def main_loop(self) -> None:
         """ Main loop of the application. """
         if self.__current_controller.tick():
-            self.__current_controller.get_scene().destroy()
             self.update()
         self.__root.after(100, self.main_loop)
         
