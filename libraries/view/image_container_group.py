@@ -55,6 +55,5 @@ class ImageContainerGroup():
         return dimension
     
     def destroy(self) -> None:
-        #self.__lb_img.unbind("<Button-1>")
         self.__lb_img.destroy()
         self.__lb_details.destroy()
