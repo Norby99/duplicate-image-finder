@@ -18,7 +18,7 @@ class SceneAnaliser(AbstractScene):
 
     def __create_widgets(self) -> None:
         self.__label = tk.Label(self.__window)
-        self.__label.pack()
+        self.__label.place(relx=.5, rely=.5, anchor="center")
 
     def destroy(self) -> None:
         self.__label.destroy()
