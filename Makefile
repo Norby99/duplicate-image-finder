@@ -11,10 +11,14 @@ mypy:
 
 build:
 	mypyc main.py
+	rmdir /s /q build
 
 compile:
 	pyinstaller --onedir --noconsole --noconfirm --clean main.py
 	move dist\main\main.exe main.exe
+	rmdir /s /q build
+	rmdir /s /q dist
+	del /q *.spec
 
 clear:
 	if exist build (rmdir /s /q build)
