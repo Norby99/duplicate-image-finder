@@ -32,6 +32,8 @@ class SceneResult(AbstractScene, Observable):
             self.__img2 = ImageContainerGroup(image2, self.__window, self)
             self.__img2.setup_widgets([0, 1], "e")
 
+            self.resize_window_elements()
+
         def resize_window_elements(self) -> None:
             self.__img1.resize()
             self.__img2.resize()
