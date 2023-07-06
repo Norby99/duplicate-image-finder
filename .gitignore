@@ -3,3 +3,4 @@ Makefile
 .mypy_cache
 .vscode
 /build
+*.pyd
