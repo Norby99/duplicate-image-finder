@@ -27,7 +27,7 @@ class Analiser(AbstractModel, DuplicateImagesProvider):
 
     def load_images(self) -> None:
         images_path = self.__get_images_path()
-        thread_list = []
+        thread_list: list[Thread] = []
         chunk_size = int(len(images_path) / self.__max_threads)
 
         for i in range(0, len(images_path), chunk_size):
