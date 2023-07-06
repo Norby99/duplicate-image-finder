@@ -6,9 +6,10 @@ from libraries.controller.abstract_controller import AbstractController
 from libraries.view.scenes.scene_analiser import SceneAnaliser
 from libraries.model.analiser import Analiser
 from libraries.utils.image_data import ImageData
-from libraries.model.providers.duplicate_images_provider import DuplicateImagesProvider
 
 from libraries.utils.iterator import Iterator
+
+import time
 
 class AnalisingController(AbstractController):
     """ Analising Controller """
@@ -32,14 +33,19 @@ class AnalisingController(AbstractController):
     
     def __main(self) -> None:
         if self.__stages.current == "loading":
+            self.load_time_start = time.time()
             self.get_scene().set_text("Loading images...")
             self.__working_thread = threading.Thread(target=self.__model.load_images)
             self.__working_thread.start()
         elif self.__stages.current == "comparing":
+            print(f"Load time: {time.time()-self.load_time_start} s")
+            self.compare_time_start = time.time()
             self.get_scene().set_text("Comparing images...")
             self.__working_thread = threading.Thread(target=self.__model.compare_images)
             self.__working_thread.start()
         elif self.__stages.current == "done":
+            print(f"Compare time: {time.time()-self.compare_time_start} s")
+            print(f"Total time: {time.time()-self.load_time_start} s")
             self.get_scene().set_text("Done!")
     
     def _set_model(self, model: Analiser) -> None:
