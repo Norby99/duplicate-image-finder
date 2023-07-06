@@ -29,8 +29,8 @@ class SceneSetupper(AbstractScene, Observable):
         lbl_dest_path = tk.Label(self.__window, text=self.__destination_path)
         btn_dest_path = tk.Button(self.__window, text="Destination folder", command=lambda: self.set_destination_path(filedialog.askdirectory(), lbl_dest_path))
 
-        btn_radio1 = tk.Radiobutton(self.__window, text="test", value="test")
-        btn_radio2 = tk.Radiobutton(self.__window, text="test1", value="test1")
+        #btn_radio1 = tk.Radiobutton(self.__window, text="test", value="test")
+        #btn_radio2 = tk.Radiobutton(self.__window, text="test1", value="test1")
 
         btn_next = tk.Button(self.__window, text="Next", command=lambda: self.send_form())
 
@@ -38,11 +38,12 @@ class SceneSetupper(AbstractScene, Observable):
         btn_image_path.grid(row=0, column=0, padx=5, pady=5, sticky=tk.EW)
         lbl_dest_path.grid(row=1, column=1, padx=5, pady=5, sticky=tk.EW)
         btn_dest_path.grid(row=1, column=0, padx=5, pady=5, sticky=tk.EW)
-        btn_radio1.grid(row=2, column=0)
-        btn_radio2.grid(row=2, column=1)
+        #btn_radio1.grid(row=2, column=0)
+        #btn_radio2.grid(row=2, column=1)
         btn_next.grid(row=3, column=1, sticky=tk.E, padx=5, pady=5)
 
-        self.__widgets.extend([lbl_image_path, btn_image_path, lbl_dest_path, btn_dest_path, btn_radio1, btn_radio2, btn_next])
+        self.__widgets.extend([lbl_image_path, btn_image_path, lbl_dest_path, btn_dest_path, btn_next])
+        #self.__widgets.extend([lbl_image_path, btn_image_path, lbl_dest_path, btn_dest_path, btn_radio1, btn_radio2, btn_next])
         
     def set_image_folder(self, path: str, lable: tk.Label) -> None:
         self.__image_folder = path
