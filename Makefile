@@ -14,8 +14,8 @@ build:
 	rmdir /s /q build
 
 compile:
-	pyinstaller --onedir --noconsole --noconfirm --clean main.py
-	move dist\main\main.exe main.exe
+	pyinstaller --onefile --noconsole --noconfirm --clean main.py
+	move dist\main.exe main.exe
 	rmdir /s /q build
 	rmdir /s /q dist
 	del /q *.spec
