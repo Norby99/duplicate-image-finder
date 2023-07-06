@@ -1,6 +1,7 @@
 __pycache__
-Makefile
 .mypy_cache
 .vscode
 /build
+/dist
 *.pyd
+*.spec
