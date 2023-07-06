@@ -26,9 +26,9 @@ class Analiser(AbstractModel, DuplicateImagesProvider):
         self.__max_threads = core_count
 
     def load_images(self) -> None:
-        images_path = self.__get_images_path()
+        images_path: list[list[str]] = self.__get_images_path()
         thread_list: list[Thread] = []
-        chunk_size = int(len(images_path) / self.__max_threads)
+        chunk_size: int = int(len(images_path) / self.__max_threads)
 
         for i in range(0, len(images_path), chunk_size):
             thread_list.append(Thread(target=self.__threadable_load_images, args=(images_path[i:i + chunk_size],)))
@@ -39,21 +39,21 @@ class Analiser(AbstractModel, DuplicateImagesProvider):
 
     def compare_images(self) -> None:
         #old_var = [images_name[i] for i, x in enumerate(images_hash) if images_hash.count(x) > 1] # O(n^2)
-        #TODO: investigate for better performance
-        old_var = defaultdict(list) # O(n)
+        #TODO: investigate for better performance (maybe use cython)
+        old_var: dict = defaultdict(list) # O(n)
         for i in self.__images:
             old_var[i.get_hash()].append(i)
-        old_var_2 = {k:v for k,v in old_var.items() if len(v)>1}
+        old_var_2: dict = {k:v for k,v in old_var.items() if len(v)>1}
 
         self.__duplicates = [[i for i in x] for x in old_var_2.values()]   # changing the index to the name outside of the loop above is a bit faster
     
     def get_duplicate_images(self) -> list[list[ImageData]]:
         return self.__duplicates
 
-    def __threadable_load_images(self, images_path: list[str]) -> None:
+    def __threadable_load_images(self, images_path: list[list[str]]) -> None:
         for img in images_path:
             try:
-                image = Image.open(img[0])
+                image: Image.Image = Image.open(img[0])
                 self.__images.append(ImageData(img[0], img[1], stat(img[0]).st_size, image.size, imagehash.average_hash(image)))
             except Exception as e:
                 print(e.args)
