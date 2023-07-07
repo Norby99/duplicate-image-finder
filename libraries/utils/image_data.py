@@ -6,6 +6,7 @@ import imagehash
 
 class ImageData:
      
+    __image: Image.Image
     __path: str
     __name: str
     __size: str
@@ -20,12 +21,16 @@ class ImageData:
         self.__hash = hash
 
     def get_image(self, size: list[int]=[0, 0]) -> Image: # type: ignore
+        """ Returns the image as a PIL Image object. If size is specified, the image will be resized to that size. """
         # the image is not loaded into memory until this method is called
-        # TODO if the image is already in memory, don't load it, just return it
+
+        if not hasattr(self, "_"+self.__class__.__name__+"__image"):
+            self.__image = Image.open(self.__path)
+
         if size == [0, 0]:
-            return Image.open(self.__path)
+            return self.__image
         else:
-            return Image.open(self.__path).resize((size[0], size[1]), Image.ANTIALIAS)
+            return self.__image.resize((size[0], size[1]), Image.ANTIALIAS)
     
     def get_path(self) -> str:
         return self.__path

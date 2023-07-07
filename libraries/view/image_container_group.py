@@ -34,13 +34,6 @@ class ImageContainerGroup():
     def resize(self) -> None:
         self.__img = ImageTk.PhotoImage(self.__img_data.get_image(self.__calc_label_dimension(self.__img_data.get_image_proportion())))
         self.__lb_img.configure(image=self.__img)
-
-    def get_image_Tk(self, size: list[int]=[0, 0]) -> ImageTk.PhotoImage:
-        if size == [0, 0]:
-            self.__img = ImageTk.PhotoImage(self.__img_data.get_image())
-        else:
-            self.__img = ImageTk.PhotoImage(self.__img_data.get_image(size))
-        return self.__img
     
     def __calc_label_dimension(self, img_proportion: float) -> list:
         lower_border_size = 100

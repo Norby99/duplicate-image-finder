@@ -13,7 +13,7 @@ class MainView():
     def __init__(self, window: tk.Tk) -> None:
 
         self.__window = window
-        self.__window.title("Image Detector")
+        self.__window.title("Duplicate Image Finder")
         self.__set_window_default_size()
         self.__window.configure(background="white")
 
