@@ -52,6 +52,8 @@ class SceneResult(AbstractScene, Observable):
             self.destroy(destroy_btn_skip=False)
 
         def destroy(self, destroy_btn_skip: bool=True) -> None:
+            self.__window.unbind("<Configure>")
+            
             if destroy_btn_skip:
                 self.__btn_skip.destroy()
             self.__img1.destroy()
