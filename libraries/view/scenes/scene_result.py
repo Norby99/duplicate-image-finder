@@ -11,11 +11,12 @@ class SceneResult(AbstractScene, Observable):
 
         __img1: ImageContainerGroup
         __img2: ImageContainerGroup
+
+        __resize_ready: bool = False
     
         __btn_skip: tk.Button
 
         __extend_window_size: list[int] = [1200, 1000]
-        __last_size: list[int] = [0, 0]
     
         def __init__(self) -> None:
             pass
@@ -25,6 +26,8 @@ class SceneResult(AbstractScene, Observable):
             self.__create_widgets()
             self.__window.geometry(str(self.__extend_window_size[0]) + "x" + str(self.__extend_window_size[1]))
 
+            self.__window.bind("<Configure>", self.resize_window_elements)
+
         def set_images(self, image1: ImageData, image2: ImageData) -> None:
             self.__img1 = ImageContainerGroup(image1, self.__window, self)
             self.__img1.setup_widgets([0, 0], "w")
@@ -32,13 +35,13 @@ class SceneResult(AbstractScene, Observable):
             self.__img2 = ImageContainerGroup(image2, self.__window, self)
             self.__img2.setup_widgets([0, 1], "e")
 
-            self.resize_window_elements()
+            self.__resize_ready = True
 
-        def resize_window_elements(self) -> None:
-            self.__img1.resize()
-            self.__img2.resize()
-
-            self.__btn_skip.place(x=self.__window.winfo_width()/2, y=self.__window.winfo_height() - 20, anchor='center')
+        def resize_window_elements(self, e: tk.Event) -> None:
+            if self.__resize_ready:
+                self.__img1.resize()
+                self.__img2.resize()
+                self.__btn_skip.place(x=self.__window.winfo_width()/2, y=self.__window.winfo_height() - 20, anchor='center')
     
         def __create_widgets(self) -> None:
             self.__btn_skip = tk.Button(self.__window, text="Skip", command=lambda: self.__send_skip_form())
