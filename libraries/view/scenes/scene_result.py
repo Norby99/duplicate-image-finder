@@ -26,7 +26,7 @@ class SceneResult(AbstractScene, Observable):
             self.__create_widgets()
             self.__window.geometry(str(self.__extend_window_size[0]) + "x" + str(self.__extend_window_size[1]))
 
-            self.__window.bind("<Configure>", self.resize_window_elements)
+            self.__window.bind("<Configure>", lambda e: self.resize_window_elements())
 
         def set_images(self, image1: ImageData, image2: ImageData) -> None:
             self.__img1 = ImageContainerGroup(image1, self.__window, self)
@@ -36,8 +36,9 @@ class SceneResult(AbstractScene, Observable):
             self.__img2.setup_widgets([0, 1], "e")
 
             self.__resize_ready = True
+            self.resize_window_elements()
 
-        def resize_window_elements(self, e: tk.Event) -> None:
+        def resize_window_elements(self) -> None:
             if self.__resize_ready:
                 self.__img1.resize()
                 self.__img2.resize()
@@ -49,12 +50,11 @@ class SceneResult(AbstractScene, Observable):
         
         def __send_skip_form(self) -> None:
             self.fire(image=None)
-            self.destroy(destroy_btn_skip=False)
+            self.destroy(only_images=True)
 
-        def destroy(self, destroy_btn_skip: bool=True) -> None:
-            self.__window.unbind("<Configure>")
-            
-            if destroy_btn_skip:
+        def destroy(self, only_images: bool=False) -> None:
+            if not only_images:
+                self.__window.unbind("<Configure>")
                 self.__btn_skip.destroy()
             self.__img1.destroy()
             self.__img2.destroy()
