@@ -38,14 +38,11 @@ class Analiser(AbstractModel, DuplicateImagesProvider):
             thread.join()
 
     def compare_images(self) -> None:
-        #old_var = [images_name[i] for i, x in enumerate(images_hash) if images_hash.count(x) > 1] # O(n^2)
-        #TODO: investigate for better performance (maybe use cython)
         old_var: dict = defaultdict(list) # O(n)
         for i in self.__images:
             old_var[i.get_hash()].append(i)
-        old_var_2: dict = {k:v for k,v in old_var.items() if len(v)>1}
 
-        self.__duplicates = [[i for i in x] for x in old_var_2.values()]   # changing the index to the name outside of the loop above is a bit faster
+        self.__duplicates = [list(v) for v in old_var.values() if len(v) > 1]
     
     def get_duplicate_images(self) -> list[list[ImageData]]:
         return self.__duplicates
