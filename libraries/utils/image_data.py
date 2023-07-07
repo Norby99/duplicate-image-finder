@@ -30,7 +30,7 @@ class ImageData:
         if size == [0, 0]:
             return self.__image
         else:
-            return self.__image.resize((size[0], size[1]), Image.ANTIALIAS)
+            return self.__image.resize((size[0], size[1]), Image.ANTIALIAS) # Image.NEAREST is faster, but it looks bad
     
     def get_path(self) -> str:
         return self.__path
