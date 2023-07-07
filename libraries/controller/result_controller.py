@@ -18,11 +18,8 @@ class ResultController(AbstractController):
         self.get_scene().subscribe(self.remove_image)
 
     def tick(self) -> bool:
-        if self.__current_images == []:
-            if not self.__set_next_images():
-                return True
-        if self.__scene.detects_resize():
-            self.__scene.resize_window_elements()
+        if self.__current_images == [] and not self.__set_next_images():
+            return True
         return False
     
     def __set_next_images(self) -> bool:

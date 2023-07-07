@@ -43,12 +43,6 @@ class SceneResult(AbstractScene, Observable):
         def __create_widgets(self) -> None:
             self.__btn_skip = tk.Button(self.__window, text="Skip", command=lambda: self.__send_skip_form())
             self.__btn_skip.grid()
-
-        def detects_resize(self) -> bool:
-            if self.__last_size != [self.__window.winfo_width(), self.__window.winfo_height()]:
-                self.__last_size = [self.__window.winfo_width(), self.__window.winfo_height()]
-                return True 
-            return False
         
         def __send_skip_form(self) -> None:
             self.fire(image=None)
