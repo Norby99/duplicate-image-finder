@@ -28,7 +28,9 @@ class ImageContainerGroup():
         self.__lb_img.bind("<Button-1>", lambda event: self.__click_f.fire(image=self.__img_data))
         self.__lb_img.grid(row=grid_pos[0], column=grid_pos[1], sticky=sticky)
 
-        self.__lb_details = tk.Label(self.__window, text=self.__img_data.get_name() + "\n" + self.__img_data.get_size(), font=("Helvetica", 12), background="white")
+        self.__lb_details = tk.Label(self.__window, text=self.__img_data.get_name()
+                                     + "\n" + str(self.__img_data.get_dimensions()[0])+"x"+str(self.__img_data.get_dimensions()[1])
+                                     + "\n" + self.__img_data.get_size(), font=("Helvetica", 12), background="white")
         self.__lb_details.grid(row=grid_pos[0] + 2, column=grid_pos[1], sticky=sticky)
 
     def resize(self) -> None:
