@@ -5,5 +5,8 @@ User friendly and fast duplicate/similar image finder.
 
 This application can find duplicates or similar images in a folder.
 At the first run it can analyze 1560 images in 11.3 sec with a 6th gen i7.
-
 Also has been tested on a 13th gen i7 and it analyzed 2048 images is 5.1 sec.
+
+The computational cost is O(n), more precisely O(XYn), where X and Y represent
+the average height and weight of the images (constants), and n is the number
+of images.
